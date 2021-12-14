@@ -88,3 +88,36 @@ export function getShare(data) {
     hideloading: true
   })
 }
+export function payTicketOrder(data) {
+  return request({
+    url: api.payTicketOrder,
+    method: 'post',
+    data,
+    hideloading: true
+  })
+}
+export function queryVipOrder(data) {
+  return request({
+    url: api.queryVipOrder,
+    method: 'post',
+    data,
+    hideloading: true
+  })
+}
+export function queryTicketOrder(data) {
+  return request({
+    url: api.queryTicketOrder,
+    method: 'post',
+    data,
+    hideloading: true
+  })
+}
+
+export function payVipOrder(data) {
+  return request({
+    url: api.payVipOrder,
+    method: 'post',
+    data,
+    hideloading: true
+  })
+}

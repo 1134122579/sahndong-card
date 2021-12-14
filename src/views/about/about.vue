@@ -1,25 +1,14 @@
 <!-- home -->
 <template>
   <div class="about-container">
-    <div class="warpper">
-      <div class="list">
-        <div class="logo"></div>
-        <div class="demo-home__title">VUE H5开发模板</div>
-        <div class="item">
-          项目地址:
-          <a href="https://github.com/sunniejs/vue-h5-template">https://github.com/sunniejs/vue-h5-template</a>
-        </div>
-        <div class="item">项目作者: sunnie</div>
-        <div class="item"></div>
-        <div class="wechat">
-          <img :src="this.wechat" alt="" />
-        </div>
-        <div class="item">关注公众号：回复“加群”即可加 前端仙女群</div>
-        <div class="item">
-          {{ userName }}
-          <van-button v-if="userName == ''" type="warning" size="small" @click="doDispatch">快点我~</van-button>
-        </div>
-      </div>
+    <!-- 用户信息 -->
+    <div class="about_header">用户信息</div>
+    <!-- 列表 -->
+    <div class="about_setingList">
+      <van-cell-group>
+        <!-- <van-cell v-for="item in settingList" :title="item.title" value="内容" /> -->
+        <van-cell title="单元格" value="内容" label="描述信息" />
+      </van-cell-group>
     </div>
   </div>
 </template>
@@ -30,7 +19,12 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      wechat: `${this.$cdn}/wx/640.gif`
+      wechat: `${this.$cdn}/wx/640.gif`,
+      settingList: [
+        {
+          title: '认证'
+        }
+      ]
     }
   },
   computed: {
@@ -64,49 +58,5 @@ export default {
   background: #fff;
   height: 100vh;
   box-sizing: border-box;
-  .warpper {
-    padding: 50px 12px 12px 12px;
-    .list {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: #666;
-      font-size: 14px;
-      .demo-home__title {
-        margin: 0 0 6px;
-        font-size: 32px;
-        .demo-home__title img,
-        .demo-home__title span {
-          display: inline-block;
-          vertical-align: middle;
-        }
-      }
-      .item {
-        font-size: 14px;
-        line-height: 34px;
-        a {
-          text-decoration: underline;
-        }
-        .van-button {
-          /* vant-ui 元素*/
-          background: #ff5500;
-        }
-      }
-
-      .logo {
-        width: 120px;
-        height: 120px;
-        background: url($cdn+'/weapp/logo.png') center / contain no-repeat;
-      }
-      .wechat {
-        width: 200px;
-        height: 200px;
-        img {
-          width: 100%;
-          height: auto;
-        }
-      }
-    }
-  }
 }
 </style>

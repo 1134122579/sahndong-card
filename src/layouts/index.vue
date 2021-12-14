@@ -27,6 +27,13 @@ export default {
           icon: 'home-o'
         },
         {
+          title: 'VIP卡',
+          to: {
+            name: 'Codepage'
+          },
+          icon: 'qr'
+        },
+        {
           title: '关于我',
           to: {
             name: 'About'

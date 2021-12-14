@@ -38,7 +38,7 @@ const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 
 module.exports = {
   publicPath: './', // 署应用包时的基本 URL。 vue-router hash 模式使用
-  // publicPath: '/dth5', //1署应用包时的基本 URL。  vue-router history模式使用
+  // publicPath: '/wxh5', //1署应用包时的基本 URL。  vue-router history模式使用
   outputDir: 'dist', //  生产环境构建文件的目录
   assetsDir: 'static', //  outputDir的静态资源(js、css、img、fonts)目录
   lintOnSave: !IS_PROD,
@@ -54,7 +54,7 @@ module.exports = {
     proxy: {
       //配置跨域v1
       '/api/v1': {
-        target: "http://dati.nxcsoft.top/api/v1",
+        target: 'http://api.skyorange.cn/api/v1',
         // ws: true,
         changOrigin: true,
         logLevel: 'debug', // 代理地址 debug
@@ -129,9 +129,11 @@ module.exports = {
      * 打包分析
      */
     if (IS_PROD) {
-      config.plugin('webpack-report').use(BundleAnalyzerPlugin, [{
-        analyzerMode: 'static'
-      }])
+      config.plugin('webpack-report').use(BundleAnalyzerPlugin, [
+        {
+          analyzerMode: 'static'
+        }
+      ])
     }
     config
       // https://webpack.js.org/configuration/devtool/#development
@@ -141,10 +143,12 @@ module.exports = {
       config
         .plugin('ScriptExtHtmlWebpackPlugin')
         .after('html')
-        .use('script-ext-html-webpack-plugin', [{
-          // 将 runtime 作为内联引入不单独存在
-          inline: /runtime\..*\.js$/
-        }])
+        .use('script-ext-html-webpack-plugin', [
+          {
+            // 将 runtime 作为内联引入不单独存在
+            inline: /runtime\..*\.js$/
+          }
+        ])
         .end()
       config.optimization.splitChunks({
         chunks: 'all',
