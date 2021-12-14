@@ -52,6 +52,7 @@
 import CryptoJS from 'crypto-js'
 import { setToken, getToken } from '@/utils/loaclStting.js'
 import { overdueToken } from '@/utils/wxload.js'
+import { compareArray } from './comp'
 
 import API from '@/api'
 export default {
@@ -107,7 +108,6 @@ export default {
     },
     // 购买
     payVipOrder() {
-      console.log(1)
       API.payVipOrder({
         pay_type: 1
       }).then(res => {
@@ -117,39 +117,55 @@ export default {
 
     addCard() {
       let that = this
-      let { qrcode, gh_openid } = this.userInfo
+      let { vip_code, gh_openid } = this.userInfo
       let cardId = 'p0--VxA2Y-Ptv4y_cjZfGXImPSi4'
       API.getShare({
         url: location.href
       }).then(res => {
-        let { rawString, nonceStr, timestamp, jsapi_ticket } = res.data
         console.log(res.data)
-        that.$wx.ready(() => {
-          // that.$wx.chooseCard({
-          //   shopId: '', // 门店Id
-          //   cardType: '', // 卡券类型
-          //   cardId: '', // 卡券Id
-          //   timestamp: Number(timestamp), // 卡券签名时间戳
-          //   nonceStr: nonceStr, // 卡券签名随机串
-          //   signType: 'SHA1', // 签名方式，默认'SHA1'
-          //   cardSign: this.createdQM(res.data), // 卡券签名
-          //   success: function (res) {
-          //     var cardList = res.cardList // 用户选中的卡券列表信息
-          //   }
-          // })
-          that.$wx.addCard({
-            cardList: [
-              {
-                cardId: cardId,
-                cardExt: this.createdQM({ jsapi_ticket, timestamp, nonceStr, cardId, qrcode, gh_openid })
-              }
-            ], // 需要添加的卡券列表
+        let appId = res.data.appId
+        let timestamp = res.data.timestamp
+        let nonceStr = res.data.nonceStr
+        let signature = res.data.signature
+        that.$wx.config({
+          debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+          appId: appId, // 必填，公众号的唯一标识，填自己的！
+          timestamp: timestamp, // 必填，生成签名的时间戳，刚才接口拿到的数据
+          nonceStr: nonceStr, // 必填，生成签名的随机串
+          signature: signature, // 必填，签名，见附录1
+          jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'chooseCard', 'addCard'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        })
+        API.getApiTicket().then(Ticket => {
+          console.log('Ticket', Ticket)
+          API.cardExtSignPackage({ card_id: cardId, code: vip_code, openid: gh_openid, timestamp }).then(
+            cardExtSign => {
+              console.log('cardExtSignPackage', cardExtSign.data)
+              let { signature, apiTicket, nonceStr, openid, card_id, code } = cardExtSign.data
+              that.$wx.ready(() => {
+                that.$wx.addCard({
+                  cardList: [
+                    {
+                      cardId: cardId,
+                      cardExt: JSON.stringify({
+                        api_ticket: apiTicket,
+                        card_id,
+                        nonce_str: nonceStr,
+                        code,
+                        openid,
+                        timestamp,
+                        signature
+                      })
+                    }
+                  ], // 需要添加的卡券列表
 
-            success: function (res) {
-              var cardList = res.cardList // 添加的卡券列表信息
-              console.log('添加的卡券列表信息', cardList)
+                  success: function (ress) {
+                    var cardList = ress.cardList // 添加的卡券列表信息
+                    console.log('添加的卡券列表信息', cardList)
+                  }
+                })
+              })
             }
-          })
+          )
         })
       })
     },
@@ -159,19 +175,50 @@ export default {
       this.QM = this.createdQM(list)
     },
     createdQM(list) {
-      let t = []
+      let strArr = []
       for (const key in list) {
         if (Object.hasOwnProperty.call(list, key)) {
           const element = list[key]
-          t.push(element)
+          strArr.push({ name: element })
         }
       }
-      let newarr = t.sort(function (e, t) {
-        return e >= t ? 1 : -1
+      console.log('compareArray', compareArray(strArr, 'name'))
+      let newarr = strArr.sort(function (e, t) {
+        return e.name >= t.name ? 1 : -1
       })
-      let QM = CryptoJS.SHA1(newarr.join('')).toString()
+      let newstr = ''
+      console.log('newarr', newarr)
+      newarr.forEach(item => {
+        newstr += item.name
+      })
+      let QM = CryptoJS.SHA1(newstr).toString()
+      console.log('QM', QM)
       return QM
     }
+    // createdQM(list) {
+    //   let strArr = []
+    //   for (const key in list) {
+    //     if (Object.hasOwnProperty.call(list, key)) {
+    //       const element = list[key]
+    //       strArr.push(element)
+    //     }
+    //   }
+    //   console.log('compareArray', compareArray(strArr,))
+    //   // let newarr = t.sort(function (e, t) {
+    //   //   return e >= t ? 1 : -1
+    //   // })
+    //   let newarr = Array.prototype.sort.call(strArr, function (a, b) {
+    //     for (var i = 0; i < a.length; i++) {
+    //       console.log(b.charCodeAt(i))
+    //       if (a.charCodeAt(i) == b.charCodeAt(i)) continue
+    //       return a.charCodeAt(i) - b.charCodeAt(i)
+    //     }
+    //   })
+    //   console.log('newarr', newarr)
+    //   let QM = CryptoJS.SHA1(newarr.join('')).toString()
+    //   console.log('QM', QM)
+    //   return QM
+    // }
   }
 }
 </script>

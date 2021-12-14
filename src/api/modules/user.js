@@ -121,3 +121,19 @@ export function payVipOrder(data) {
     hideloading: true
   })
 }
+export function getApiTicket(data) {
+  return request({
+    url: api.getApiTicket,
+    method: 'get',
+    data,
+    hideloading: true
+  })
+}
+export function cardExtSignPackage(data) {
+  return request({
+    url: api.cardExtSignPackage,
+    method: 'post',
+    data,
+    hideloading: true
+  })
+}

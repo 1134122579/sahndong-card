@@ -3,7 +3,7 @@ export function compareArray(arr, property, sequence) {
     // 两两比较，如果前一个比后一个大，则交换位置。
     for (var i = 0; i < arr.length - 1 - j; i += 1) {
       // 取出数组对应属性进行排序
-      var before = this.compareString(arr[i][property], arr[i + 1][property])
+      var before = compareString(arr[i][property], arr[i + 1][property])
       if (before === 1) {
         var temp = arr[i]
         arr[i] = arr[i + 1]
@@ -26,7 +26,7 @@ function compareString(str1, str2) {
   // 字符串长度短的，排序靠前
   if (StringLength > 0) {
     for (var i = 0; i < StringLength; i += 1) {
-      StringCode = this.compareCharacter(str1[i], str2[i])
+      StringCode = compareCharacter(str1[i], str2[i])
       if (StringCode === -1) {
         code = -1
         break
@@ -51,8 +51,8 @@ function compareString(str1, str2) {
 }
 // 单字符排序，优先级：（特殊字符>数字>英文字母>汉字）
 function compareCharacter(Letter1, Letter2) {
-  var Letter1TypeNum = this.DetermineType(Letter1)
-  var Letter2TypeNum = this.DetermineType(Letter2)
+  var Letter1TypeNum = DetermineType(Letter1)
+  var Letter2TypeNum = DetermineType(Letter2)
   var before = ''
   var after = ''
   var code = ''
@@ -77,8 +77,8 @@ function compareCharacter(Letter1, Letter2) {
     }
     if (Letter1TypeNum === 3) {
       // 转换成汉字对应拼音的首字母进行比较
-      before = this.getFirstLetter(Letter1).toLocaleLowerCase().charCodeAt(0)
-      after = this.getFirstLetter(Letter2).toLocaleLowerCase().charCodeAt(0)
+      before = getFirstLetter(Letter1).toLocaleLowerCase().charCodeAt(0)
+      after = getFirstLetter(Letter2).toLocaleLowerCase().charCodeAt(0)
     }
   }
   if (before > after) {

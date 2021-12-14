@@ -12,6 +12,8 @@ const api = {
   getReport: '/getReport', //获取排行榜
   getRule: '/getRule', //获取规则
   getToken: '/getToken', //获取token
+  getApiTicket: '/getApiTicket',
+  cardExtSignPackage: '/cardExtSignPackage',
   getQiShu: '/getQiShu' //获取期数
 }
 
