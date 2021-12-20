@@ -25,13 +25,8 @@ service.interceptors.request.use(
       })
     }
     config.headers['app-type'] = 'ios'
-    setToken(
-      '9d59c1418ce0b33a8e13e5b384c88a0c60b999d16f371077a31dd30316f28b0a806621a8a13b560508c54bb132a02926d36a5174d2b1da58db07386156f33b1886b936de3bc4a7b1e2946a927cd4f173'
-    )
     if (getToken()) {
-      config.headers['token'] =
-        '9d59c1418ce0b33a8e13e5b384c88a0c60b999d16f371077a31dd30316f28b0a806621a8a13b560508c54bb132a02926d36a5174d2b1da58db07386156f33b1886b936de3bc4a7b1e2946a927cd4f173'
-      // config.headers['token'] = getToken()
+      config.headers['token'] = getToken()
     }
     return config
   },
@@ -46,7 +41,6 @@ service.interceptors.response.use(
   response => {
     Toast.clear()
     const res = response.data
-
     if (res.status && res.status !== 200) {
       // 登录超时,重新登录
       // if (res.status === 401) {
@@ -54,12 +48,15 @@ service.interceptors.response.use(
       //     location.reload()
       //   })
       // }
+      if (res.status === 202) {
+        return Promise.reject(Toast.fail(res.message))
+      }
       // token过期
       if (res.status == 203) {
         overdueToken()
       }
       // Toast.fail(res.message)
-      return Promise.reject(res || 'error')
+      return Promise.reject(Toast.fail(res.message))
     } else {
       return Promise.resolve(res)
     }

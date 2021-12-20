@@ -57,7 +57,7 @@ module.exports = {
         target: 'http://api.skyorange.cn/api/v1',
         // ws: true,
         changOrigin: true,
-        logLevel: 'debug', // 代理地址 debug
+        // logLevel: 'debug', // 代理地址 debug
         pathRewrite: {
           '^/api/v1': ''
         }

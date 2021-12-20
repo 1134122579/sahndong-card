@@ -11,14 +11,22 @@ import {
   Dialog,
   Popup,
   Icon,
+  NavBar,
   CellGroup,
   Lazyload,
   Swipe,
+  Field,
   SwipeItem,
+  Uploader,
+  Form,
   Image as VanImage,
   Progress
 } from 'vant'
 Vue.use(Button)
+Vue.use(Form)
+Vue.use(Uploader)
+Vue.use(Field)
+Vue.use(NavBar)
 Vue.use(CellGroup)
 Vue.use(Lazyload)
 Vue.use(Swipe)

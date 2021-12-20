@@ -1,6 +1,6 @@
 const api = {
   Login: '/wxLogin', //微信授权登录
-  UserInfo: '/userInfo', //获取信息
+  getUserInfo: '/userInfo', //获取信息
   UserName: '/name',
   payTicketOrder: '/payTicketOrder', //单次票据费用
   queryTicketOrder: '/queryTicketOrder', //单次票据费用查询
@@ -14,6 +14,8 @@ const api = {
   getToken: '/getToken', //获取token
   getApiTicket: '/getApiTicket',
   cardExtSignPackage: '/cardExtSignPackage',
+  upCardImage: '/upCardImage',
+  authUserInfo: '/authUserInfo',
   getQiShu: '/getQiShu' //获取期数
 }
 

@@ -10,6 +10,27 @@ export const constantRouterMap = [
       title: '',
       keepAlive: false
     }
+  },
+  {
+    path: '/user',
+    component: () => import('@/views/user/user.vue'),
+    meta: {
+      title: '用户信息',
+      keepAlive: false
+    }
+  },
+  {
+    path: '/codePage',
+    component: () => import('@/views/codePage/index.vue'),
+    meta: {
+      title: '单次购买',
+      keepAlive: false
+    }
+  },
+  {
+    path: '*',
+    name: 'pageNull',
+    redirect: '/'
   }
 
   // {

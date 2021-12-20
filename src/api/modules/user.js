@@ -14,7 +14,7 @@ export function login(data) {
 // 用户信息 post 方法
 export function getUserInfo(data) {
   return request({
-    url: api.UserInfo,
+    url: api.getUserInfo,
     method: 'get',
     data,
     hideloading: true
@@ -132,6 +132,22 @@ export function getApiTicket(data) {
 export function cardExtSignPackage(data) {
   return request({
     url: api.cardExtSignPackage,
+    method: 'post',
+    data,
+    hideloading: true
+  })
+}
+export function upCardImage(data) {
+  return request({
+    url: api.upCardImage,
+    method: 'post',
+    data,
+    hideloading: true
+  })
+}
+export function authUserInfo(data) {
+  return request({
+    url: api.authUserInfo,
     method: 'post',
     data,
     hideloading: true

@@ -16,6 +16,7 @@
     "crypto-js": "^4.1.1",
     "lib-flexible": "^0.3.2",
     "lodash": "^4.17.15",
+    "qrcodejs2": "0.0.2",
     "regenerator-runtime": "^0.13.5",
     "vant": "^2.10.2",
     "vue": "^2.6.11",
