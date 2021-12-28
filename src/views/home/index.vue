@@ -167,7 +167,8 @@ export default {
     addCard() {
       let that = this
       let { vip_code, gh_openid } = this.userInfo
-      let cardId = 'p0--VxG4NjeyKajM2cREPvC-Q7-s'
+      // let cardId = 'p0--VxG4NjeyKajM2cREPvC-Q7-s'
+      let cardId = this.userInfo.card_id
       that.Api.getShare({
         url: location.href
       }).then(res => {

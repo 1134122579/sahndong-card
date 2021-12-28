@@ -1,56 +1,59 @@
 <template>
   <div class="userinfoStyle">
     <div class="header">
-      <van-nav-bar title="用户信息" left-text="返回" left-arrow @click-left="onClickLeft" />
+      <van-nav-bar title="用户认证" left-text="返回" left-arrow @click-left="onClickLeft" />
     </div>
-    <div class="eitUser">
-      <van-form @submit="onSubmit">
-        <div class="upload">
-          <van-uploader :after-read="afterRead">
-            <van-image v-if="!cardImg" :src="card_Z"></van-image>
-            <van-image v-if="cardImg" height="240" :src="cardImg"></van-image>
-          </van-uploader>
-        </div>
-        <van-field
-          v-model="userInfo.name"
-          name="name"
-          label="姓名"
-          placeholder="请填写姓名"
-          :rules="[{ required: true, message: '请填写姓名' }]"
-        />
-        <van-field
-          v-model="userInfo.mobile"
-          type="tel"
-          name="mobile"
-          label="手机号"
-          placeholder="请输入手机号"
-          :rules="[{ required: true, message: '请填写手机号' }]"
-        />
-        <van-field
-          v-model="userInfo.idcard"
-          name="idcard"
-          label="身份证"
-          placeholder="请输入身份证"
-          :rules="[{ required: true, message: '请填写身份证' }]"
-        />
-        <!-- <van-field
+    <div class="content_b">
+      <div class="eitUser">
+        <van-form @submit="onSubmit">
+          <div class="upload">
+            <van-uploader :after-read="afterRead">
+              <van-image v-if="!cardImg" :src="card_Z"></van-image>
+              <van-image v-if="cardImg" height="240" :src="cardImg"></van-image>
+              <p class="rz">点击，快速认证</p>
+            </van-uploader>
+          </div>
+          <van-field
+            v-model="userInfo.name"
+            name="name"
+            label="姓名"
+            placeholder="请填写姓名"
+            :rules="[{ required: true, message: '请填写姓名' }]"
+          />
+          <van-field
+            v-model="userInfo.mobile"
+            type="tel"
+            name="mobile"
+            label="手机号"
+            placeholder="请输入手机号"
+            :rules="[{ required: true, message: '请填写手机号' }]"
+          />
+          <van-field
+            v-model="userInfo.idcard"
+            name="idcard"
+            label="身份证"
+            placeholder="请输入身份证"
+            :rules="[{ required: true, message: '请填写身份证' }]"
+          />
+          <!-- <van-field
           v-model="userInfo.address"
           name="address"
           label="地址"
           placeholder="请输入地址"
           :rules="[{ required: true, message: '请填写地址' }]"
         /> -->
-        <div style="margin: 16px">
-          <van-button round block type="info" color="#000000" native-type="submit">认证</van-button>
-        </div>
-      </van-form>
+          <div style="margin: 16px">
+            <van-button round block type="info" color="#D85A1D" native-type="submit">立即认证</van-button>
+          </div>
+        </van-form>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { Toast } from 'vant'
-
+import { compressImg } from '@/utils/compressImg'
 export default {
   data() {
     return {
@@ -73,17 +76,40 @@ export default {
     },
     afterRead(file) {
       // 此时可以自行将文件上传至服务器
-      console.log(file)
       let that = this
-      let fromData = new FormData()
-      fromData.append('file', file.file)
-      this.Api.upCardImage(fromData).then(res => {
-        console.log(res, 'upCardImage')
-        that.cardImg = res.data.imgLink
-        that.userInfo.idcard = res.data.cardInfo['公民身份号码']
-        that.userInfo.name = res.data.cardInfo['姓名']
-        that.userInfo.address = res.data.cardInfo['住址']
+      this.$toast.loading({ message: '上传中...' })
+      console.log(file.file.size, '压缩前')
+      compressImg(file.file).then(res => {
+        res = that.dataURLtoFile(res)
+        console.log('compressImg', res)
+        let data = res.sise > file.file.size ? file.file : res
+        if (data.size / 1024 / 1024 > 2) {
+          that.$toast.clear()
+          return false
+        }
+        let fromData = new FormData()
+        fromData.append('file', data)
+        this.Api.upCardImage(fromData).then(res => {
+          console.log(res, 'upCardImage')
+          that.$toast.clear()
+          that.cardImg = res.data.imgLink
+          that.userInfo.idcard = res.data.cardInfo['公民身份号码']
+          that.userInfo.name = res.data.cardInfo['姓名']
+          that.userInfo.address = res.data.cardInfo['住址']
+        })
       })
+    },
+    dataURLtoFile(dataurl, filename) {
+      // 生成Blob
+      var arr = dataurl.split(',')
+      var mime = arr[0].match(/:(.*?);/)[1]
+      var bstr = atob(arr[1])
+      var n = bstr.length
+      var u8arr = new Uint8Array(n)
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n)
+      }
+      return new Blob([u8arr], { type: mime })
     },
     onClickLeft() {
       console.log('返回')
@@ -106,11 +132,33 @@ export default {
 
 <style lang="scss">
 .userinfoStyle {
-  padding-bottom: 40px;
+  width: 100%;
+  height: 100vh;
+  background: url('http://mfyfile.greatorange.cn/bgsky.jpg') no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .header {
+    width: 100%;
+  }
+  .content_b {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex: 1;
+  }
+
   .eitUser {
-    .van-cell {
-      padding: 0.667rem 0.43rem;
-    }
+    padding: 10px;
+    background: #fff;
+    border-radius: 10px;
+    box-sizing: border-box;
+    // .van-cell {
+    //   padding: 0.667rem 0.43rem;
+    // }
     .upload {
       display: flex;
       background: #fff;
@@ -118,9 +166,14 @@ export default {
       box-sizing: border-box;
       padding: 20px;
       justify-content: center;
+      .rz {
+        color: #1900f7;
+        text-align: center;
+        font-size: 14px;
+      }
       .van-uploader {
         box-sizing: border-box;
-        padding: 10px;
+        // padding: 10px;
       }
     }
   }

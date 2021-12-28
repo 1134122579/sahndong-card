@@ -31,7 +31,7 @@ export const constantRouterMap = [
     path: '/receide',
     component: () => import('@/views/receide/index.vue'),
     meta: {
-      title: '领取卡包',
+      title: '天空之橙特权卡',
       keepAlive: false
     }
   },

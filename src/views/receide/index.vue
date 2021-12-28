@@ -1,41 +1,10 @@
 <!-- home -->
 <template>
   <div class="index-container">
-    <div class="header">
-      <img src="http://video.greatorange.cn/cofevip.jpg" class="headerImg" />
-    </div>
-    <!-- <div class="content">
-      <p>有趣的灵魂在这里相遇~</p>
-      <h2>天空之橙购票入口~</h2>
-      <h5>2021.11.01-2022.05.31</h5>
-      <h5>￥20~￥54</h5>
-      <div class="desc">
-        <p>人一票,凭票入场。(PS:每天09:00-22:00)</p>
-        <p>门票请当天购买,仅购买当天有效。</p>
-        <p>PS.系统每天会自动核销,提前购买门票作废</p>
-        <p>一定要看好下方的活动须知哦!!!</p>
-      </div>
-    </div>
-    <div class="bottom">
-      <van-cell
-        v-for="item in setList"
-        :key="item.id"
-        :title="item.title"
-        is-link
-        :arrow-direction="ITEMID == item.id ? 'down' : ''"
-        clickable
-        @click="onclick(item.id)"
-      >
-        <template #label>
-          <div v-if="ITEMID == item.id">
-            <p v-for="(decItem, decIndex) in item.dec">{{ decItem }}</p>
-          </div>
-        </template>
-      </van-cell>
-    </div> -->
+    <img src="../../assets/lqbg.png" class="headerImg" />
     <div class="button">
-      <van-button v-if="!isVip" round block color="#000000" @click="receiveVip">立即领取</van-button>
-      <van-button v-if="isVip" round block color="#000000" @click="addCard">立即查看</van-button>
+      <van-button v-if="!isVip" round block color="#CE5824" @click="receiveVip">立即领取</van-button>
+      <van-button v-if="isVip" round block color="#CE5824" @click="addCard">立即查看</van-button>
     </div>
   </div>
 </template>
@@ -97,6 +66,7 @@ export default {
     }
   },
   created() {
+    this.computImg()
     if (!getToken()) {
       overdueToken()
     } else {
@@ -109,6 +79,7 @@ export default {
   mounted() {},
 
   methods: {
+    computImg() {},
     receiveVip() {
       if (this.userInfo.is_auth != 1) {
         this.$router.push({
@@ -117,7 +88,11 @@ export default {
         return
       }
       this.Api.receiveVip().then(res => {
-        this.addCard()
+        console.log(res, 123156456)
+        if (res.status == 200) {
+          this.addCard()
+        } else {
+        }
       })
     },
     onclick(id) {
@@ -176,7 +151,8 @@ export default {
     addCard() {
       let that = this
       let { vip_code, gh_openid } = this.userInfo
-      let cardId = 'p0--VxG4NjeyKajM2cREPvC-Q7-s'
+      // let cardId = 'p0--VxG4NjeyKajM2cREPvC-Q7-s'
+      let cardId = this.userInfo.card_id
       that.Api.getShare({
         url: location.href
       }).then(res => {
@@ -283,15 +259,19 @@ export default {
 <style lang="scss" scoped>
 .index-container {
   width: 100%;
-  height: 100%;
-  overflow-y: auto;
+  min-height: 100%;
+  // height: 100%;
+  background: #4b3a64;
+  // overflow: hidden;
+  position: relative;
+  .headerImg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
   .header {
     width: 100%;
     box-sizing: border-box;
-    .headerImg {
-      width: 100%;
-      height: auto;
-    }
   }
   .content {
     padding: 20px;
@@ -319,7 +299,8 @@ export default {
   }
   .button {
     position: absolute;
-    bottom: 20px;
+    bottom: 2.93333rem;
+
     padding: 0 40px;
     box-sizing: border-box;
     width: 100%;
