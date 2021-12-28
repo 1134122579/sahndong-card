@@ -16,7 +16,8 @@ const api = {
   cardExtSignPackage: '/cardExtSignPackage',
   upCardImage: '/upCardImage',
   authUserInfo: '/authUserInfo',
-  getQiShu: '/getQiShu' //获取期数
+  getQiShu: '/getQiShu', //获取期数
+  receiveVip: '/receiveVip'
 }
 
 export default api

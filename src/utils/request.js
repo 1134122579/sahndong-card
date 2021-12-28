@@ -24,6 +24,9 @@ service.interceptors.request.use(
         forbidClick: true
       })
     }
+    // setToken(
+    //   'b1be342c039c65565a602d2f87bb10ddbc1d2b32b6af64679ce2526bed0da1612ddaedfc8346e2a650a8a1ffc4ebcd27bca478c75141dca93c2378ead3b0241e2c0d51196dc79b4a7cb888a6a54d319e'
+    // )
     config.headers['app-type'] = 'ios'
     if (getToken()) {
       config.headers['token'] = getToken()

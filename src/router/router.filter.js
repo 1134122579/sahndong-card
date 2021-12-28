@@ -3,10 +3,10 @@ import { getShareInfo } from '@/utils/share.js'
 export default function (router) {
   router.beforeEach((to, from, next) => {
     let wxConfig = {
-      title: '',
-      desc: '',
+      title: '天空之城',
+      desc: '天空之城欢迎你',
       link: location.origin + location.pathname,
-      imgUrl: 'http://dati.nxcsoft.top/icon.jpg',
+      imgUrl: 'http://mfyfile.greatorange.cn/skylogo.jpg',
       success(res) {}
     }
     getShareInfo(wxConfig, res => {

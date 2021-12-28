@@ -14,15 +14,15 @@
         <van-field
           v-model="userInfo.name"
           name="name"
-          label="用户名"
-          placeholder="用户名"
-          :rules="[{ required: true, message: '请填写用户名' }]"
+          label="姓名"
+          placeholder="请填写姓名"
+          :rules="[{ required: true, message: '请填写姓名' }]"
         />
         <van-field
           v-model="userInfo.mobile"
           type="tel"
           name="mobile"
-          label="手机"
+          label="手机号"
           placeholder="请输入手机号"
           :rules="[{ required: true, message: '请填写手机号' }]"
         />
@@ -33,13 +33,13 @@
           placeholder="请输入身份证"
           :rules="[{ required: true, message: '请填写身份证' }]"
         />
-        <van-field
+        <!-- <van-field
           v-model="userInfo.address"
           name="address"
           label="地址"
           placeholder="请输入地址"
           :rules="[{ required: true, message: '请填写地址' }]"
-        />
+        /> -->
         <div style="margin: 16px">
           <van-button round block type="info" color="#000000" native-type="submit">认证</van-button>
         </div>

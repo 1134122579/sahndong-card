@@ -4,7 +4,7 @@
     <div class="header">
       <img src="http://video.greatorange.cn/cofevip.jpg" class="headerImg" />
     </div>
-    <div class="content">
+    <!-- <div class="content">
       <p>有趣的灵魂在这里相遇~</p>
       <h2>天空之橙购票入口~</h2>
       <h5>2021.11.01-2022.05.31</h5>
@@ -16,7 +16,6 @@
         <p>一定要看好下方的活动须知哦!!!</p>
       </div>
     </div>
-    <!-- 活动介绍 -->
     <div class="bottom">
       <van-cell
         v-for="item in setList"
@@ -33,11 +32,10 @@
           </div>
         </template>
       </van-cell>
-    </div>
+    </div> -->
     <div class="button">
-      <!-- v-if="isVip" -->
-      <van-button v-if="!isVip" round block color="#000000" @click="payVipOrder">立即购买</van-button>
-      <van-button v-if="isVip" round block color="#000000" @click="addCard">立即领取</van-button>
+      <van-button v-if="!isVip" round block color="#000000" @click="receiveVip">立即领取</van-button>
+      <van-button v-if="isVip" round block color="#000000" @click="addCard">立即查看</van-button>
     </div>
   </div>
 </template>
@@ -95,7 +93,7 @@ export default {
   },
   computed: {
     isVip() {
-      return this.userInfo.vip_time_out >= +new Date() / 1000
+      return this.userInfo.vip_time_out >= +new Date() / 1000 && this.userInfo.is_auth == 1
     }
   },
   created() {
@@ -111,6 +109,17 @@ export default {
   mounted() {},
 
   methods: {
+    receiveVip() {
+      if (this.userInfo.is_auth != 1) {
+        this.$router.push({
+          path: '/user'
+        })
+        return
+      }
+      this.Api.receiveVip().then(res => {
+        this.addCard()
+      })
+    },
     onclick(id) {
       this.ITEMID = id
     },

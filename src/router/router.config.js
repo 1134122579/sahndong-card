@@ -20,13 +20,22 @@ export const constantRouterMap = [
     }
   },
   {
-    path: '/codePage',
+    path: '/codepage',
     component: () => import('@/views/codePage/index.vue'),
     meta: {
       title: '单次购买',
       keepAlive: false
     }
   },
+  {
+    path: '/receide',
+    component: () => import('@/views/receide/index.vue'),
+    meta: {
+      title: '领取卡包',
+      keepAlive: false
+    }
+  },
+
   {
     path: '*',
     name: 'pageNull',

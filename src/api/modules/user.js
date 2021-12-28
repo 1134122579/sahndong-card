@@ -153,3 +153,11 @@ export function authUserInfo(data) {
     hideloading: true
   })
 }
+export function receiveVip(data) {
+  return request({
+    url: api.receiveVip,
+    method: 'get',
+    data,
+    hideloading: true
+  })
+}
