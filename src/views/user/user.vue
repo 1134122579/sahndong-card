@@ -4,15 +4,16 @@
       <van-nav-bar title="用户认证" left-text="返回" left-arrow @click-left="onClickLeft" />
     </div>
     <div class="content_b">
+      <img class="contentimg" src="../../assets/vipTitle.png" alt="" />
       <div class="eitUser">
         <van-form @submit="onSubmit">
-          <div class="upload">
+          <!-- <div class="upload">
             <van-uploader :after-read="afterRead">
               <van-image v-if="!cardImg" :src="card_Z"></van-image>
               <van-image v-if="cardImg" height="240" :src="cardImg"></van-image>
               <p class="rz">点击，快速认证</p>
             </van-uploader>
-          </div>
+          </div> -->
           <van-field
             v-model="userInfo.name"
             name="name"
@@ -28,13 +29,13 @@
             placeholder="请输入手机号"
             :rules="[{ required: true, message: '请填写手机号' }]"
           />
-          <van-field
+          <!-- <van-field
             v-model="userInfo.idcard"
             name="idcard"
             label="身份证"
             placeholder="请输入身份证"
             :rules="[{ required: true, message: '请填写身份证' }]"
-          />
+          /> -->
           <!-- <van-field
           v-model="userInfo.address"
           name="address"
@@ -43,10 +44,11 @@
           :rules="[{ required: true, message: '请填写地址' }]"
         /> -->
           <div style="margin: 16px">
-            <van-button round block type="info" color="#D85A1D" native-type="submit">立即认证</van-button>
+            <van-button round block size="small" type="info" color="#D85A1D" native-type="submit">立即认证</van-button>
           </div>
         </van-form>
       </div>
+      <img class="bottomtimg" src="../../assets/bottom.png" alt="" />
     </div>
   </div>
 </template>
@@ -145,10 +147,18 @@ export default {
   }
   .content_b {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    flex-direction: column;
     width: 100%;
     flex: 1;
+
+    .contentimg {
+      width: 80%;
+    }
+    .bottomtimg {
+      width: 100%;
+    }
   }
 
   .eitUser {

@@ -62,7 +62,7 @@ export default {
   },
   computed: {
     isVip() {
-      return this.userInfo.vip_time_out >= +new Date() / 1000 && this.userInfo.is_auth == 1
+      return this.userInfo.vip_time_out >= +new Date() / 1000
     }
   },
   created() {
@@ -81,14 +81,13 @@ export default {
   methods: {
     computImg() {},
     receiveVip() {
-      if (this.userInfo.is_auth != 1) {
-        this.$router.push({
-          path: '/user'
-        })
-        return
-      }
+      // if (this.userInfo.is_auth != 1) {
+      //   this.$router.push({
+      //     path: '/user'
+      //   })
+      //   return
+      // }
       this.Api.receiveVip().then(res => {
-        console.log(res, 123156456)
         if (res.status == 200) {
           this.addCard()
         } else {
