@@ -7,7 +7,7 @@ export const constantRouterMap = [
     path: '/',
     component: () => import('@/views/home/index.vue'),
     meta: {
-      title: '',
+      title: '天空之橙年卡购买',
       keepAlive: false
     }
   },

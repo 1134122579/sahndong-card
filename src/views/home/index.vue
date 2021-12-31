@@ -1,43 +1,10 @@
 <!-- home -->
 <template>
   <div class="index-container">
-    <div class="header">
-      <img src="http://video.greatorange.cn/cofevip.jpg" class="headerImg" />
-    </div>
-    <div class="content">
-      <p>有趣的灵魂在这里相遇~</p>
-      <h2>天空之橙购票入口~</h2>
-      <h5>2021.11.01-2022.05.31</h5>
-      <h5>￥20~￥54</h5>
-      <div class="desc">
-        <p>人一票,凭票入场。(PS:每天09:00-22:00)</p>
-        <p>门票请当天购买,仅购买当天有效。</p>
-        <p>PS.系统每天会自动核销,提前购买门票作废</p>
-        <p>一定要看好下方的活动须知哦!!!</p>
-      </div>
-    </div>
-    <!-- 活动介绍 -->
-    <div class="bottom">
-      <van-cell
-        v-for="item in setList"
-        :key="item.id"
-        :title="item.title"
-        is-link
-        :arrow-direction="ITEMID == item.id ? 'down' : ''"
-        clickable
-        @click="onclick(item.id)"
-      >
-        <template #label>
-          <div v-if="ITEMID == item.id">
-            <p v-for="(decItem, decIndex) in item.dec">{{ decItem }}</p>
-          </div>
-        </template>
-      </van-cell>
-    </div>
-    <div class="button">
-      <!-- v-if="isVip" -->
-      <van-button v-if="!isVip" round block color="#000000" @click="payVipOrder">立即购买</van-button>
-      <van-button v-if="isVip" round block color="#000000" @click="addCard">立即领取</van-button>
+    <img src="../../assets/years.png" class="headerImg" />
+    <div class="button img_animes">
+      <van-button v-if="!isVip" class="buttontext" round block @click="payVipOrder">立即购买</van-button>
+      <van-button v-if="isVip" round block class="buttontext" @click="addCard">立即领取</van-button>
     </div>
   </div>
 </template>
@@ -95,7 +62,7 @@ export default {
   },
   computed: {
     isVip() {
-      return this.userInfo.vip_time_out >= +new Date() / 1000
+      return this.userInfo.vip_time_out >= +new Date() / 1000 && this.userInfo.vip_time_out >= 1609689600
     }
   },
   created() {
@@ -168,7 +135,7 @@ export default {
       let that = this
       let { vip_code, gh_openid } = this.userInfo
       // let cardId = 'p0--VxG4NjeyKajM2cREPvC-Q7-s'
-      let cardId = this.userInfo.card_id
+      let cardId = this.userInfo.vip_card_id
       that.Api.getShare({
         url: location.href
       }).then(res => {
@@ -275,15 +242,19 @@ export default {
 <style lang="scss" scoped>
 .index-container {
   width: 100%;
-  height: 100%;
-  overflow-y: auto;
+  min-height: 100%;
+  // height: 100%;
+  background: #dc5317;
+  // overflow: hidden;
+  position: relative;
+  .headerImg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
   .header {
     width: 100%;
     box-sizing: border-box;
-    .headerImg {
-      width: 100%;
-      height: auto;
-    }
   }
   .content {
     padding: 20px;
@@ -311,10 +282,41 @@ export default {
   }
   .button {
     position: absolute;
-    bottom: 20px;
+    bottom: 2.93333rem;
+
     padding: 0 40px;
     box-sizing: border-box;
     width: 100%;
+    color: #dc5317;
+  }
+}
+</style>
+<style lang="scss">
+.buttontext {
+  color: #dc5317;
+}
+// .img_animes {
+//   animation: scaleDrew 2s ease-in-out infinite;
+// }
+/* 按钮动画效果 */
+.img_animes {
+  -webkit-animation: free_download 1s linear alternate infinite;
+  animation: free_download 1s linear alternate infinite;
+}
+@-webkit-keyframes free_download {
+  0% {
+    -webkit-transform: scale(0.9);
+  }
+  100% {
+    -webkit-transform: scale(1);
+  }
+}
+@keyframes free_download {
+  0% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 </style>

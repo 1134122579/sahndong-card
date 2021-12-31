@@ -19,7 +19,7 @@
             name="name"
             label="姓名"
             placeholder="请填写姓名"
-            :rules="[{ required: true, message: '请填写姓名' }]"
+            :rules="[{ required: true }]"
           />
           <van-field
             v-model="userInfo.mobile"
@@ -27,15 +27,15 @@
             name="mobile"
             label="手机号"
             placeholder="请输入手机号"
-            :rules="[{ required: true, message: '请填写手机号' }]"
+            :rules="[{ required: true }]"
           />
-          <!-- <van-field
+          <van-field
             v-model="userInfo.idcard"
             name="idcard"
             label="身份证"
             placeholder="请输入身份证"
-            :rules="[{ required: true, message: '请填写身份证' }]"
-          /> -->
+            :rules="[{ required: true }]"
+          />
           <!-- <van-field
           v-model="userInfo.address"
           name="address"
