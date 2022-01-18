@@ -2,10 +2,60 @@
 <template>
   <div class="index-container">
     <img src="../../assets/years.png" class="headerImg" />
-    <div class="button img_animes">
-      <van-button v-if="!isVip" class="buttontext" round block @click="payVipOrder">立即购买</van-button>
-      <van-button v-if="isVip" round block class="buttontext" @click="addCard">立即领取</van-button>
+    <div class="button">
+      <van-checkbox v-model="checked" ref="checkboxes" checked-color="#ff0000" @click="lookaqxy" icon-size="16px">
+        <template #icon="props">
+          <div style="margin-top: -1px">
+            <img
+              class="img-icon"
+              style="width: 18px; height: 18px; display: block"
+              :src="props.checked ? activeIcon : inactiveIcon"
+            />
+          </div>
+        </template>
+        <p class="aqxy">我已认真阅读 <a>《安全协议》</a></p>
+      </van-checkbox>
+      <van-button
+        v-if="!isVip"
+        class="buttontext img_animes"
+        style="margin: 4px 0"
+        size="small"
+        round
+        block
+        @click="payVipOrder"
+        >立即购买</van-button
+      >
+      <van-button
+        v-if="isVip"
+        round
+        block
+        size="small"
+        style="margin: 4px 0"
+        class="buttontext img_animes"
+        @click="addCard"
+        >立即领取</van-button
+      >
     </div>
+    <!-- 安全协议 -->
+    <van-popup :lazy-render="false" get-container="index-container" v-model="show" round @click-overlay="overlay">
+      <div class="lookpage">
+        <div class="title">《安全协议》</div>
+        <p>
+          立立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取
+        </p>
+        <!--  -->
+        <van-button
+          type="primary"
+          color="#DC5317"
+          :disabled="time > 0"
+          style="margin: 16px 0"
+          block
+          @click="mylook"
+          size="small"
+          >我已阅读安全协议{{ time > 0 ? time + '秒' : '' }}</van-button
+        >
+      </div>
+    </van-popup>
   </div>
 </template>
 
@@ -18,6 +68,15 @@ import { Toast } from 'vant'
 export default {
   data() {
     return {
+      activeIcon: require('@/assets/activeIcon.png'),
+      inactiveIcon: require('@/assets/inactiveIcon.png'),
+      isVip: false,
+      time: 5,
+      timeT: null,
+      islookCard: false,
+      checked: false,
+      is_pay: false,
+      show: false,
       payToolsOrderApi: null,
       userInfo: '',
       ITEMID: '',
@@ -28,35 +87,7 @@ export default {
         card_id: 'pjZ8Yt1XGILfi-FUsewpnnolGgZk',
         timestamp: 1404896688
       },
-      setList: [
-        {
-          id: 1,
-          title: '活动时间',
-          dec: ['即日起至2021.05.31（PS：每天9：00-22:00）']
-        },
-        {
-          id: 2,
-          title: '活动地址',
-          dec: ['张店区上海路与和平路交叉口天空之双创艺术空间']
-        },
-        {
-          id: 3,
-          title: '活动规则',
-          dec: [
-            '注意事项',
-            '1、不要踩室内室外的石子;',
-            '2、请不要踩空间内的椅子&沙发;',
-            '3、请随身携带您的衣物,请勿乱放,不要影响他人的参观感受;',
-            '4.室内禁止吸烟,室外有专门吸烟区;',
-            '5、垃圾请入垃圾桶,不要随处乱丢;',
-            '6请在使用后及时归位空间内所属物品(桌椅、书籍、装饰物);',
-            '7、请勿移动二楼展品;',
-            '8、请轻拿轻放所有玻璃、陶瓷等易碎材质物品;',
-            '9.禁止携带专业设备(单反、打光板、云台支架等)变装拍摄,',
-            '如有商拍需要请致电Tel17864211712(小爱同学)。'
-          ]
-        }
-      ],
+
       QM: ''
     }
   },
@@ -78,6 +109,38 @@ export default {
   mounted() {},
 
   methods: {
+    lookCard() {
+      if (!this.checked) {
+        this.$toast.fail('请阅读安全协议')
+        return
+      }
+      this.show = true
+      this.is_pay = true
+    },
+    overlay() {
+      console.log(14)
+      // this.$refs.checkboxes.toggle(false)
+      this.show = false
+    },
+    mylook() {
+      this.$refs.checkboxes.toggle(true)
+      // console.log(this.$refs.checkboxes.toggle())
+      this.show = false
+    },
+    lookaqxy() {
+      this.time = 5
+      this.is_pay = false
+      this.$refs.checkboxes.toggle(false)
+      clearInterval(this.timeT)
+      this.timeT = setInterval(() => {
+        this.time--
+        if (this.time < -0) {
+          clearInterval(this.timeT)
+          this.time = 0
+        }
+      }, 1000)
+      this.show = true
+    },
     onclick(id) {
       this.ITEMID = id
     },
@@ -85,6 +148,10 @@ export default {
     payVipOrder() {
       let that = this
       let { is_auth } = this.userInfo
+      if (!this.checked) {
+        this.$toast.fail('请阅读安全协议')
+        return
+      }
       if (is_auth != 1) {
         that.$router.push({ path: '/user' })
         return
@@ -283,11 +350,31 @@ export default {
   .button {
     position: absolute;
     bottom: 2.93333rem;
-
     padding: 0 40px;
     box-sizing: border-box;
     width: 100%;
     color: #dc5317;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  // 安全协议
+  .aqxy {
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    a {
+      color: #008dd4;
+    }
+  }
+  // 看
+  .lookpage {
+    width: 86vw;
+    height: 86vh;
+    box-sizing: border-box;
+    padding: 10px;
   }
 }
 </style>

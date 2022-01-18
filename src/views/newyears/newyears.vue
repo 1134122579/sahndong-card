@@ -1,7 +1,7 @@
 <!-- home -->
 <template>
   <div class="index-container">
-    <img src="../../assets/lqbg.png" class="headerImg" />
+    <img src="http://mfyfile.greatorange.cn/newyear.png" class="headerImg" />
     <div class="button">
       <van-checkbox v-model="checked" ref="checkboxes" checked-color="#ff0000" @click="lookaqxy" icon-size="16px">
         <template #icon="props">
@@ -22,20 +22,18 @@
         size="small"
         round
         block
-        color="#CE5824"
-        @click="receiveVip"
-        >立即领取</van-button
+        @click="payVipOrder"
+        >立即购买</van-button
       >
       <van-button
         v-if="isVip"
-        class="buttontext img_animes"
-        size="small"
-        style="margin: 4px 0"
         round
         block
-        color="#CE5824"
+        size="small"
+        style="margin: 4px 0"
+        class="buttontext img_animes"
         @click="addCard"
-        >立即查看</van-button
+        >立即领取</van-button
       >
     </div>
     <!-- 安全协议 -->
@@ -89,45 +87,16 @@ export default {
         card_id: 'pjZ8Yt1XGILfi-FUsewpnnolGgZk',
         timestamp: 1404896688
       },
-      setList: [
-        {
-          id: 1,
-          title: '活动时间',
-          dec: ['即日起至2021.05.31（PS：每天9：00-22:00）']
-        },
-        {
-          id: 2,
-          title: '活动地址',
-          dec: ['张店区上海路与和平路交叉口天空之双创艺术空间']
-        },
-        {
-          id: 3,
-          title: '活动规则',
-          dec: [
-            '注意事项',
-            '1、不要踩室内室外的石子;',
-            '2、请不要踩空间内的椅子&沙发;',
-            '3、请随身携带您的衣物,请勿乱放,不要影响他人的参观感受;',
-            '4.室内禁止吸烟,室外有专门吸烟区;',
-            '5、垃圾请入垃圾桶,不要随处乱丢;',
-            '6请在使用后及时归位空间内所属物品(桌椅、书籍、装饰物);',
-            '7、请勿移动二楼展品;',
-            '8、请轻拿轻放所有玻璃、陶瓷等易碎材质物品;',
-            '9.禁止携带专业设备(单反、打光板、云台支架等)变装拍摄,',
-            '如有商拍需要请致电Tel17864211712(小爱同学)。'
-          ]
-        }
-      ],
+
       QM: ''
     }
   },
   computed: {
     isVip() {
-      return this.userInfo.vip_time_out >= +new Date() / 1000
+      return this.userInfo.vip_time_out >= +new Date() / 1000 && this.userInfo.vip_time_out >= 1609689600
     }
   },
   created() {
-    this.computImg()
     if (!getToken()) {
       overdueToken()
     } else {
@@ -172,25 +141,6 @@ export default {
       }, 1000)
       this.show = true
     },
-    computImg() {},
-    receiveVip() {
-      if (!this.checked) {
-        this.$toast.fail('请阅读安全协议')
-        return
-      }
-      // if (this.userInfo.is_auth != 1) {
-      //   this.$router.push({
-      //     path: '/user'
-      //   })
-      //   return
-      // }
-      this.Api.receiveVip().then(res => {
-        if (res.status == 200) {
-          this.addCard()
-        } else {
-        }
-      })
-    },
     onclick(id) {
       this.ITEMID = id
     },
@@ -198,6 +148,10 @@ export default {
     payVipOrder() {
       let that = this
       let { is_auth } = this.userInfo
+      if (!this.checked) {
+        this.$toast.fail('请阅读安全协议')
+        return
+      }
       if (is_auth != 1) {
         that.$router.push({ path: '/user' })
         return
@@ -248,7 +202,7 @@ export default {
       let that = this
       let { vip_code, gh_openid } = this.userInfo
       // let cardId = 'p0--VxG4NjeyKajM2cREPvC-Q7-s'
-      let cardId = this.userInfo.card_id
+      let cardId = this.userInfo.vip_card_id
       that.Api.getShare({
         url: location.href
       }).then(res => {
@@ -357,7 +311,7 @@ export default {
   width: 100%;
   min-height: 100%;
   // height: 100%;
-  background: #4b3a64;
+  background: #94918d;
   // overflow: hidden;
   position: relative;
   .headerImg {
@@ -396,10 +350,10 @@ export default {
   .button {
     position: absolute;
     bottom: 2.93333rem;
-
     padding: 0 40px;
     box-sizing: border-box;
     width: 100%;
+    color: #dc5317;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -424,7 +378,6 @@ export default {
   }
 }
 </style>
-
 <style lang="scss">
 .buttontext {
   color: #dc5317;

@@ -20,8 +20,13 @@ import {
   Uploader,
   Form,
   Image as VanImage,
-  Progress
+  Progress,
+  Checkbox,
+  CheckboxGroup
 } from 'vant'
+
+Vue.use(Checkbox)
+Vue.use(CheckboxGroup)
 Vue.use(Button)
 Vue.use(Form)
 Vue.use(Uploader)

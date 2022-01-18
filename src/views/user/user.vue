@@ -4,7 +4,8 @@
       <van-nav-bar title="用户认证" left-text="返回" left-arrow @click-left="onClickLeft" />
     </div>
     <div class="content_b">
-      <img class="contentimg" src="../../assets/vipTitle.png" alt="" />
+      <!-- <img class="contentimg" src="../../assets/vipTitle.png" alt="" /> -->
+      <div class="contentimg"></div>
       <div class="eitUser">
         <van-form @submit="onSubmit">
           <!-- <div class="upload">
@@ -48,7 +49,7 @@
           </div>
         </van-form>
       </div>
-      <img class="bottomtimg" src="../../assets/bottom.png" alt="" />
+      <!-- <img class="bottomtimg" src="../../assets/bottom.png" alt="" /> -->
     </div>
   </div>
 </template>
@@ -136,7 +137,7 @@ export default {
 .userinfoStyle {
   width: 100%;
   height: 100vh;
-  background: url('http://mfyfile.greatorange.cn/bgsky.jpg') no-repeat;
+  background: url('http://mfyfile.greatorange.cn/skyauth.png') no-repeat;
   background-size: 100% 100%;
   display: flex;
   justify-content: center;
@@ -147,12 +148,12 @@ export default {
   }
   .content_b {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 100%;
+    box-sizing: border-box;
     flex: 1;
-
     .contentimg {
       width: 80%;
     }
@@ -166,6 +167,7 @@ export default {
     background: #fff;
     border-radius: 10px;
     box-sizing: border-box;
+    // margin-top: 100%;
     // .van-cell {
     //   padding: 0.667rem 0.43rem;
     // }

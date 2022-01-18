@@ -28,6 +28,14 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/newyears',
+    component: () => import('@/views/newyears/newyears.vue'),
+    meta: {
+      title: '年卡领取',
+      keepAlive: false
+    }
+  },
+  {
     path: '/receide',
     component: () => import('@/views/receide/index.vue'),
     meta: {
