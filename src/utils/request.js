@@ -24,9 +24,9 @@ service.interceptors.request.use(
         forbidClick: true
       })
     }
-    setToken(
-      '4282abe5ea6cddde843d51408d75a5ee2c42c1bff0ae1b020dbe884be65a9ffa5609b3a2e965b73055b1702ae771c42c5e872b9b4c2f995ace6e2a974eec55a55726b9ee532fdb4a01e6449788adc7ce'
-    )
+    // setToken(
+    //   '4282abe5ea6cddde843d51408d75a5ee2c42c1bff0ae1b020dbe884be65a9ffa5609b3a2e965b73055b1702ae771c42c5e872b9b4c2f995ace6e2a974eec55a55726b9ee532fdb4a01e6449788adc7ce'
+    // )
     config.headers['app-type'] = 'ios'
     if (getToken()) {
       config.headers['token'] = getToken()

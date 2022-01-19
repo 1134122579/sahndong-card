@@ -13,12 +13,12 @@
             />
           </div>
         </template>
-        <p class="aqxy">我已认真阅读 <a>《安全协议》</a></p>
+        <p class="aqxy">我已阅读并同意 <a>《安全协议》</a></p>
       </van-checkbox>
       <van-button
         v-if="!isVip"
         class="buttontext img_animes"
-        style="margin: 4px 0"
+        style="margin: 6px 0"
         size="small"
         round
         block
@@ -30,7 +30,7 @@
         round
         block
         size="small"
-        style="margin: 4px 0"
+        style="margin: 6px 0"
         class="buttontext img_animes"
         @click="addCard"
         >立即领取</van-button
@@ -41,7 +41,7 @@
       <div class="lookpage">
         <div class="title">《安全协议》</div>
         <p>
-          立立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取
+          立立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领
         </p>
         <!--  -->
         <van-button
@@ -52,7 +52,7 @@
           block
           @click="mylook"
           size="small"
-          >我已阅读安全协议{{ time > 0 ? time + '秒' : '' }}</van-button
+          >我已阅读并同意《安全协议》{{ time > 0 ? time + '秒' : '' }}</van-button
         >
       </div>
     </van-popup>
@@ -87,7 +87,6 @@ export default {
         card_id: 'pjZ8Yt1XGILfi-FUsewpnnolGgZk',
         timestamp: 1404896688
       },
-
       QM: ''
     }
   },
@@ -119,12 +118,10 @@ export default {
     },
     overlay() {
       console.log(14)
-      // this.$refs.checkboxes.toggle(false)
       this.show = false
     },
     mylook() {
       this.$refs.checkboxes.toggle(true)
-      // console.log(this.$refs.checkboxes.toggle())
       this.show = false
     },
     lookaqxy() {
@@ -178,16 +175,7 @@ export default {
       let { out_trade_no } = this.payToolsOrderApi
       WeixinJSBridge.invoke('getBrandWCPayRequest', that.payToolsOrderApi, function (res) {
         console.log('onBridgeReady', res)
-        if (res.err_msg == 'get_brand_wcpay_request:ok') {
-          // alert(out_trade_no)
-          // 使用以上方式判断前端返回,微信团队郑重提示：
-          //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
-          // 成功调取在验证接口
-          that.queryToolsOrder(out_trade_no)
-        } else {
-          // Toast.fail('支付失败')
-          that.queryToolsOrder(out_trade_no)
-        }
+        that.queryToolsOrder(out_trade_no)
       })
     },
     // 查询是否支付成功
@@ -201,7 +189,6 @@ export default {
     addCard() {
       let that = this
       let { vip_code, gh_openid } = this.userInfo
-      // let cardId = 'p0--VxG4NjeyKajM2cREPvC-Q7-s'
       let cardId = this.userInfo.vip_card_id
       that.Api.getShare({
         url: location.href
@@ -219,38 +206,35 @@ export default {
           signature: signature, // 必填，签名，见附录1
           jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'chooseCard', 'addCard'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         })
-        that.Api.getApiTicket().then(Ticket => {
-          console.log('Ticket', Ticket)
-          that.Api.cardExtSignPackage({ card_id: cardId, code: vip_code, openid: gh_openid, timestamp }).then(
-            cardExtSign => {
-              console.log('cardExtSignPackage', cardExtSign.data)
-              let { signature, apiTicket, nonceStr, openid, card_id, code } = cardExtSign.data
-              that.$wx.ready(() => {
-                that.$wx.addCard({
-                  cardList: [
-                    {
-                      cardId: cardId,
-                      cardExt: JSON.stringify({
-                        api_ticket: apiTicket,
-                        card_id,
-                        nonce_str: nonceStr,
-                        code,
-                        openid,
-                        timestamp,
-                        signature
-                      })
-                    }
-                  ], // 需要添加的卡券列表
-
-                  success: function (ress) {
-                    var cardList = ress.cardList // 添加的卡券列表信息
-                    console.log('添加的卡券列表信息', cardList)
+        that.Api.cardExtSignPackage({ card_id: cardId, code: vip_code, openid: gh_openid, timestamp }).then(
+          cardExtSign => {
+            console.log('cardExtSignPackage', cardExtSign.data)
+            let { signature, apiTicket, nonceStr, openid, card_id, code } = cardExtSign.data
+            that.$wx.ready(() => {
+              that.$wx.addCard({
+                cardList: [
+                  {
+                    cardId: cardId,
+                    cardExt: JSON.stringify({
+                      api_ticket: apiTicket,
+                      card_id,
+                      nonce_str: nonceStr,
+                      code,
+                      openid,
+                      timestamp,
+                      signature
+                    })
                   }
-                })
+                ], // 需要添加的卡券列表
+
+                success: function (ress) {
+                  var cardList = ress.cardList // 添加的卡券列表信息
+                  console.log('添加的卡券列表信息', cardList)
+                }
               })
-            }
-          )
-        })
+            })
+          }
+        )
       })
     },
 
@@ -366,7 +350,7 @@ export default {
     text-align: center;
     width: 100%;
     a {
-      color: #008dd4;
+      // color: #de6129;
     }
   }
   // 看
@@ -375,6 +359,13 @@ export default {
     height: 86vh;
     box-sizing: border-box;
     padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    p {
+      flex: 1;
+    }
   }
 }
 </style>

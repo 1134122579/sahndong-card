@@ -31,7 +31,7 @@ export const constantRouterMap = [
     path: '/newyears',
     component: () => import('@/views/newyears/newyears.vue'),
     meta: {
-      title: '年卡领取',
+      title: '春节特权卡',
       keepAlive: false
     }
   },

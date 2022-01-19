@@ -16,12 +16,26 @@
             />
           </div>
         </template>
-        <p class="aqxy">我已认真阅读 <a>《安全协议》</a></p>
+        <p class="aqxy">我已阅读并同意 <a>《安全协议》</a></p>
       </van-checkbox>
-      <van-button v-if="!islookCard" class="buttontext img_animes" size="small" round block @click="payVipOrder"
+      <van-button
+        v-if="!islookCard"
+        class="buttontext img_animes"
+        style="margin: 8px 0"
+        size="small"
+        round
+        block
+        @click="payVipOrder"
         >立即购买</van-button
       >
-      <van-button v-if="islookCard" size="small" round block class="buttontext img_animes" @click="lookCard"
+      <van-button
+        v-if="islookCard"
+        size="small"
+        style="margin: 8px 0"
+        round
+        block
+        class="buttontext img_animes"
+        @click="lookCard"
         >立即查看</van-button
       >
     </div>
@@ -30,7 +44,7 @@
       <div class="lookpage" v-show="!is_pay">
         <div class="title">《安全协议》</div>
         <p>
-          立立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取
+          立立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立
         </p>
         <!--  -->
         <van-button
@@ -41,7 +55,7 @@
           block
           @click="mylook"
           size="small"
-          >我已阅读安全协议{{ time > 0 ? time + '秒' : '' }}</van-button
+          >我已阅读并同意《安全协议》{{ time > 0 ? time + '秒' : '' }}</van-button
         >
       </div>
       <div class="codepage" v-show="is_pay">
@@ -90,12 +104,10 @@ export default {
     },
     overlay() {
       console.log(14)
-      // this.$refs.checkboxes.toggle(false)
       this.show = false
     },
     mylook() {
       this.$refs.checkboxes.toggle(true)
-      // console.log(this.$refs.checkboxes.toggle())
       this.show = false
     },
     lookaqxy() {
@@ -128,19 +140,15 @@ export default {
         this.$toast.fail('请阅读安全协议')
         return
       }
-      this.is_pay = true
-      this.islookCard = true
-      this.show = true
-      return
       let that = this
-
       let { is_auth } = this.userInfo
-      if (is_auth != 1) {
-        this.$router.push({
-          path: '/user'
-        })
-        return
-      }
+      // 认证
+      // if (is_auth != 1) {
+      //   this.$router.push({
+      //     path: '/user'
+      //   })
+      //   return
+      // }
       this.Api.payTicketOrder({
         pay_type: 1
       }).then(res => {
@@ -162,16 +170,8 @@ export default {
       let that = this
       let { out_trade_no } = this.payToolsOrderApi
       WeixinJSBridge.invoke('getBrandWCPayRequest', that.payToolsOrderApi, function (res) {
-        if (res.err_msg == 'get_brand_wcpay_request:ok') {
-          // alert(out_trade_no)
-          // 使用以上方式判断前端返回,微信团队郑重提示：
-          //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
-          // 成功调取在验证接口
-          that.queryToolsOrder(out_trade_no)
-        } else {
-          // Toast.fail('支付失败')
-          that.queryToolsOrder(out_trade_no)
-        }
+        that.queryToolsOrder(out_trade_no)
+        return
       })
     },
     // 查询是否支付成功
@@ -264,7 +264,7 @@ export default {
   }
   .button {
     position: absolute;
-    bottom: 2.93333rem;
+    bottom: 4.93333rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -281,7 +281,7 @@ export default {
     text-align: center;
     width: 100%;
     a {
-      color: #008dd4;
+      // color: #de6129;
     }
   }
   // 看
@@ -290,6 +290,13 @@ export default {
     height: 86vh;
     box-sizing: border-box;
     padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    p {
+      flex: 1;
+    }
   }
 }
 </style>

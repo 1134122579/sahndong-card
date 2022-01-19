@@ -1,7 +1,7 @@
 <!-- home -->
 <template>
   <div class="index-container">
-    <img src="http://mfyfile.greatorange.cn/newyear.png" class="headerImg" />
+    <img src="http://mfyfile.greatorange.cn/newyear1.png" class="headerImg" />
     <div class="button">
       <van-checkbox v-model="checked" ref="checkboxes" checked-color="#ff0000" @click="lookaqxy" icon-size="16px">
         <template #icon="props">
@@ -13,27 +13,27 @@
             />
           </div>
         </template>
-        <p class="aqxy">我已认真阅读 <a>《安全协议》</a></p>
+        <p class="aqxy">我已阅读并同意 <a>《安全协议》</a></p>
       </van-checkbox>
       <van-button
         v-if="!isVip"
         class="buttontext img_animes"
-        style="margin: 4px 0"
+        style="margin: 8px 0"
         size="small"
         round
         block
-        @click="payVipOrder"
-        >立即购买</van-button
+        @click="receiveVip"
+        >立即领取</van-button
       >
       <van-button
         v-if="isVip"
+        class="buttontext img_animes"
+        size="small"
+        style="margin: 8px 0"
         round
         block
-        size="small"
-        style="margin: 4px 0"
-        class="buttontext img_animes"
         @click="addCard"
-        >立即领取</van-button
+        >立即查看</van-button
       >
     </div>
     <!-- 安全协议 -->
@@ -41,7 +41,7 @@
       <div class="lookpage">
         <div class="title">《安全协议》</div>
         <p>
-          立立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取
+          立立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立
         </p>
         <!--  -->
         <van-button
@@ -52,7 +52,7 @@
           block
           @click="mylook"
           size="small"
-          >我已阅读安全协议{{ time > 0 ? time + '秒' : '' }}</van-button
+          >我已阅读并同意《安全协议》{{ time > 0 ? time + '秒' : '' }}</van-button
         >
       </div>
     </van-popup>
@@ -87,16 +87,17 @@ export default {
         card_id: 'pjZ8Yt1XGILfi-FUsewpnnolGgZk',
         timestamp: 1404896688
       },
-
+      setList: [],
       QM: ''
     }
   },
   computed: {
     isVip() {
-      return this.userInfo.vip_time_out >= +new Date() / 1000 && this.userInfo.vip_time_out >= 1609689600
+      return this.userInfo.vip_time_out >= +new Date() / 1000
     }
   },
   created() {
+    this.computImg()
     if (!getToken()) {
       overdueToken()
     } else {
@@ -119,12 +120,10 @@ export default {
     },
     overlay() {
       console.log(14)
-      // this.$refs.checkboxes.toggle(false)
       this.show = false
     },
     mylook() {
       this.$refs.checkboxes.toggle(true)
-      // console.log(this.$refs.checkboxes.toggle())
       this.show = false
     },
     lookaqxy() {
@@ -141,6 +140,26 @@ export default {
       }, 1000)
       this.show = true
     },
+    computImg() {},
+    receiveVip() {
+      if (!this.checked) {
+        this.$toast.fail('请阅读安全协议')
+        return
+      }
+      // 是否认证
+      // if (this.userInfo.is_auth != 1) {
+      //   this.$router.push({
+      //     path: '/user'
+      //   })
+      //   return
+      // }
+      this.Api.receiveVip().then(res => {
+        if (res.status == 200) {
+          this.addCard()
+        } else {
+        }
+      })
+    },
     onclick(id) {
       this.ITEMID = id
     },
@@ -148,10 +167,6 @@ export default {
     payVipOrder() {
       let that = this
       let { is_auth } = this.userInfo
-      if (!this.checked) {
-        this.$toast.fail('请阅读安全协议')
-        return
-      }
       if (is_auth != 1) {
         that.$router.push({ path: '/user' })
         return
@@ -178,15 +193,15 @@ export default {
       let { out_trade_no } = this.payToolsOrderApi
       WeixinJSBridge.invoke('getBrandWCPayRequest', that.payToolsOrderApi, function (res) {
         console.log('onBridgeReady', res)
+        that.queryToolsOrder(out_trade_no)
+        return
         if (res.err_msg == 'get_brand_wcpay_request:ok') {
           // alert(out_trade_no)
           // 使用以上方式判断前端返回,微信团队郑重提示：
           //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
           // 成功调取在验证接口
-          that.queryToolsOrder(out_trade_no)
         } else {
           // Toast.fail('支付失败')
-          that.queryToolsOrder(out_trade_no)
         }
       })
     },
@@ -201,8 +216,7 @@ export default {
     addCard() {
       let that = this
       let { vip_code, gh_openid } = this.userInfo
-      // let cardId = 'p0--VxG4NjeyKajM2cREPvC-Q7-s'
-      let cardId = this.userInfo.vip_card_id
+      let cardId = this.userInfo.new_year_card_id
       that.Api.getShare({
         url: location.href
       }).then(res => {
@@ -219,38 +233,34 @@ export default {
           signature: signature, // 必填，签名，见附录1
           jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'chooseCard', 'addCard'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         })
-        that.Api.getApiTicket().then(Ticket => {
-          console.log('Ticket', Ticket)
-          that.Api.cardExtSignPackage({ card_id: cardId, code: vip_code, openid: gh_openid, timestamp }).then(
-            cardExtSign => {
-              console.log('cardExtSignPackage', cardExtSign.data)
-              let { signature, apiTicket, nonceStr, openid, card_id, code } = cardExtSign.data
-              that.$wx.ready(() => {
-                that.$wx.addCard({
-                  cardList: [
-                    {
-                      cardId: cardId,
-                      cardExt: JSON.stringify({
-                        api_ticket: apiTicket,
-                        card_id,
-                        nonce_str: nonceStr,
-                        code,
-                        openid,
-                        timestamp,
-                        signature
-                      })
-                    }
-                  ], // 需要添加的卡券列表
-
-                  success: function (ress) {
-                    var cardList = ress.cardList // 添加的卡券列表信息
-                    console.log('添加的卡券列表信息', cardList)
+        that.Api.cardExtSignPackage({ card_id: cardId, code: vip_code, openid: gh_openid, timestamp }).then(
+          cardExtSign => {
+            console.log('cardExtSignPackage', cardExtSign.data)
+            let { signature, apiTicket, nonceStr, openid, card_id, code } = cardExtSign.data
+            that.$wx.ready(() => {
+              that.$wx.addCard({
+                cardList: [
+                  {
+                    cardId: cardId,
+                    cardExt: JSON.stringify({
+                      api_ticket: apiTicket,
+                      card_id,
+                      nonce_str: nonceStr,
+                      code,
+                      openid,
+                      timestamp,
+                      signature
+                    })
                   }
-                })
+                ], // 需要添加的卡券列表
+                success: function (ress) {
+                  var cardList = ress.cardList // 添加的卡券列表信息
+                  console.log('添加的卡券列表信息', cardList)
+                }
               })
-            }
-          )
-        })
+            })
+          }
+        )
       })
     },
 
@@ -279,30 +289,6 @@ export default {
       console.log('QM', QM)
       return QM
     }
-    // createdQM(list) {
-    //   let strArr = []
-    //   for (const key in list) {
-    //     if (Object.hasOwnProperty.call(list, key)) {
-    //       const element = list[key]
-    //       strArr.push(element)
-    //     }
-    //   }
-    //   console.log('compareArray', compareArray(strArr,))
-    //   // let newarr = t.sort(function (e, t) {
-    //   //   return e >= t ? 1 : -1
-    //   // })
-    //   let newarr = Array.prototype.sort.call(strArr, function (a, b) {
-    //     for (var i = 0; i < a.length; i++) {
-    //       console.log(b.charCodeAt(i))
-    //       if (a.charCodeAt(i) == b.charCodeAt(i)) continue
-    //       return a.charCodeAt(i) - b.charCodeAt(i)
-    //     }
-    //   })
-    //   console.log('newarr', newarr)
-    //   let QM = CryptoJS.SHA1(newarr.join('')).toString()
-    //   console.log('QM', QM)
-    //   return QM
-    // }
   }
 }
 </script>
@@ -311,7 +297,7 @@ export default {
   width: 100%;
   min-height: 100%;
   // height: 100%;
-  background: #94918d;
+  background: #94908d;
   // overflow: hidden;
   position: relative;
   .headerImg {
@@ -349,11 +335,10 @@ export default {
   }
   .button {
     position: absolute;
-    bottom: 2.93333rem;
+    bottom: 5.3333rem;
     padding: 0 40px;
     box-sizing: border-box;
     width: 100%;
-    color: #dc5317;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -366,7 +351,7 @@ export default {
     text-align: center;
     width: 100%;
     a {
-      color: #008dd4;
+      // color: #de6129;
     }
   }
   // 看
@@ -375,9 +360,17 @@ export default {
     height: 86vh;
     box-sizing: border-box;
     padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    p {
+      flex: 1;
+    }
   }
 }
 </style>
+
 <style lang="scss">
 .buttontext {
   color: #dc5317;

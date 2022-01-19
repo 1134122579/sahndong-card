@@ -20,6 +20,7 @@
             name="name"
             label="姓名"
             placeholder="请填写姓名"
+            required
             :rules="[{ required: true }]"
           />
           <van-field
@@ -28,15 +29,10 @@
             name="mobile"
             label="手机号"
             placeholder="请输入手机号"
+            required
             :rules="[{ required: true }]"
           />
-          <van-field
-            v-model="userInfo.idcard"
-            name="idcard"
-            label="身份证"
-            placeholder="请输入身份证"
-            :rules="[{ required: true }]"
-          />
+          <van-field v-model="userInfo.idcard" name="idcard" label="身份证" placeholder="请输入身份证" />
           <!-- <van-field
           v-model="userInfo.address"
           name="address"
@@ -137,8 +133,8 @@ export default {
 .userinfoStyle {
   width: 100%;
   height: 100vh;
-  background: url('http://mfyfile.greatorange.cn/skyauth.png') no-repeat;
-  background-size: 100% 100%;
+  background: #94908d url('http://mfyfile.greatorange.cn/skyauth.png') no-repeat;
+  background-size: 100% auto;
   display: flex;
   justify-content: center;
   align-items: center;
