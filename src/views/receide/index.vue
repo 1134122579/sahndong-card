@@ -40,22 +40,34 @@
     </div>
     <!-- 安全协议 -->
     <van-popup :lazy-render="false" get-container="index-container" v-model="show" round @click-overlay="overlay">
-      <div class="lookpage">
-        <div class="title">《安全协议》</div>
-        <p>
-          立立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立即领取立
-        </p>
-        <van-button
-          type="primary"
-          color="#DC5317"
-          :disabled="time > 0"
-          style="margin: 16px 0"
-          block
-          @click="mylook"
-          size="small"
-          >我已阅读并同意《安全协议》{{ time > 0 ? time + '秒' : '' }}</van-button
-        >
-      </div>
+    <div class="lookpage">
+          <div class="title" style="font-weight: 600">空之橙入场须知</div>
+          <div style="line-height: 1.5; flex: 1; margin: 10px 0">
+            <p>1、进入天空之橙需购票，20元/人，一人一票，门票单次有效，凭票扫码入场</p>
+            <p>2、本道闸为自动转闸机，入场请向“扫码口”出示您的购票二维码，方可推门进入</p>
+            <p>
+              3、请您注意安全警示，遵守游览秩序，请勿攀爬、翻越安全防护栏；未经许可，请勿进入非对外开放的空间区域；请勿拥挤打闹，上下石级时，要小心谨慎
+            </p>
+            <p>4、注意保管好随身携带的物品 5、请勿携带宠物进入天空之橙</p>
+            <p>
+              6、未经允许，禁止专业拍摄/商业拍摄/大型拍摄（禁止除手机以外的其他拍摄三脚架、稳定器、换装、化妆师补妆都是不ok的哦~感谢配合）如有拍摄需求，请恰17864211712（小爱同学）
+            </p>
+            <p>7、茶室、餐食预约电话 TEL.18917769185（MAX）</p>
+            <p>8、如有场地、商务合作等其他需求请拨打电话 TEL.18917769179（小爱同学）或求助附近的工作人员</p>
+            <p>9、天空之橙营业时间为09:00-22:00</p>
+          </div>
+          <!--  -->
+          <van-button
+            type="primary"
+            color="#DC5317"
+            :disabled="time > 0"
+            style="margin: 16px 0"
+            block
+            @click="mylook"
+            size="small"
+            >我已阅读并同意《安全协议》{{ time > 0 ? time + '秒' : '' }}</van-button
+          >
+        </div>
     </van-popup>
   </div>
 </template>
