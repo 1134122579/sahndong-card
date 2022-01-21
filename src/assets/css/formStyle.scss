@@ -1,0 +1,132 @@
+.index-container {
+  width: 100%;
+  min-height: 100%;
+  // height: 100%;
+  background: #dc5317;
+  // overflow: hidden;
+  position: relative;
+
+  .headerImg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .header {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .content {
+    padding: 20px;
+
+    h2 {
+      font-size: 24px;
+      letter-spacing: 2px;
+      line-height: 2;
+    }
+
+    h5 {
+      letter-spacing: 2px;
+      line-height: 2;
+    }
+
+    .desc {
+      margin-top: 20px;
+    }
+
+    p {
+      // padding: 10px 0;
+      // letter-spacing: 4px;
+      font-size: 14px;
+      line-height: 2;
+    }
+  }
+
+  .bottom {
+    padding-bottom: 80px;
+  }
+
+  .button {
+    position: absolute;
+    bottom: 2.23333rem;
+    padding: 0 40px;
+    box-sizing: border-box;
+    width: 100%;
+    color: #dc5317;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  // 安全协议
+  .aqxy {
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+
+    a {
+      // color: #de6129;
+    }
+  }
+
+  // 看规则
+  .lookpage {
+    width: 86vw;
+    // height: 70vh;
+    box-sizing: border-box;
+    padding: 20px 24px 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+
+    .title {
+      font-size: 20px;
+    }
+
+    p {
+      flex: 1;
+    }
+  }
+}
+
+// 阅读规则的按钮
+.buttontext {
+  color: #dc5317;
+  font-size: 18px;
+  letter-spacing: 4px;
+  text-indent: 4px;
+  margin: 0.4rem 0;
+}
+
+// .img_animes {
+//   animation: scaleDrew 2s ease-in-out infinite;
+// }
+/* 按钮动画效果 */
+.img_animes {
+  -webkit-animation: free_download 1s linear alternate infinite;
+  animation: free_download 1s linear alternate infinite;
+}
+
+@-webkit-keyframes free_download {
+  0% {
+    -webkit-transform: scale(0.9);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes free_download {
+  0% {
+    transform: scale(0.9);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

@@ -1,7 +1,7 @@
 <!-- home -->
 <template>
   <div class="index-container">
-    <img src="http://mfyfile.greatorange.cn/newyear1.png" class="headerImg" />
+    <img src="@/assets/giveshop.png" class="headerImg" />
     <div class="button">
       <van-checkbox v-model="checked" ref="checkboxes" checked-color="#ff0000" @click="lookaqxy" icon-size="16px">
         <template #icon="props">
@@ -15,8 +15,8 @@
         </template>
         <p class="aqxy">我已阅读并同意 <a>《安全协议》</a></p>
       </van-checkbox>
-      <van-button v-if="!isVip" class="buttontext img_animes" round block @click="receiveVip">立即领取</van-button>
-      <van-button v-if="isVip" class="buttontext img_animes" round block @click="addCard">立即查看</van-button>
+      <van-button class="buttontext img_animes" round block @click="receiveVip">立即领取</van-button>
+      <!-- <van-button v-if="isVip" class="buttontext img_animes" round block @click="addCard">立即查看</van-button> -->
     </div>
     <!-- 安全协议 -->
     <van-popup :lazy-render="false" get-container="index-container" v-model="show" round @click-overlay="overlay">
@@ -49,7 +49,7 @@ export default {
     return {
       activeIcon: require('@/assets/activeIcon.png'),
       inactiveIcon: require('@/assets/inactiveIcon.png'),
-      isVip: false,
+      // isVip: false,
       time: 5,
       timeT: null,
       islookCard: false,
@@ -124,18 +124,23 @@ export default {
     },
     computImg() {},
     receiveVip() {
+      let code = this.$route.query?.vipcode
       if (!this.checked) {
         this.$toast.fail('请阅读安全协议')
         return
       }
       // 是否认证
-      // if (this.userInfo.is_auth != 1) {
-      //   this.$router.push({
-      //     path: '/user'
-      //   })
-      //   return
-      // }
-      this.Api.receiveVip().then(res => {
+      if (this.userInfo.is_auth != 1) {
+        this.$router.push({
+          path: '/user'
+        })
+        return
+      }
+      if (!code) {
+        Toast.fail('链接失效')
+        return
+      }
+      this.Api.receiveSkyBeerVip({ code }).then(res => {
         if (res.status == 200) {
           this.addCard()
         } else {
@@ -198,7 +203,7 @@ export default {
     addCard() {
       let that = this
       let { vip_code, gh_openid } = this.userInfo
-      let cardId = this.userInfo.new_year_card_id
+      let cardId = this.userInfo.skybeer_year_card
       that.Api.getShare({
         url: location.href
       }).then(res => {
@@ -215,6 +220,7 @@ export default {
           signature: signature, // 必填，签名，见附录1
           jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'chooseCard', 'addCard'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         })
+
         that.Api.cardExtSignPackage({ card_id: cardId, code: vip_code, openid: gh_openid, timestamp }).then(
           cardExtSign => {
             console.log('cardExtSignPackage', cardExtSign.data)
@@ -279,7 +285,7 @@ export default {
 .index-container {
   background: #94908d;
   .button {
-    bottom: 4.8rem;
+    // bottom: 4.8rem;
   }
 }
 </style>

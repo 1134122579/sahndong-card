@@ -18,61 +18,53 @@
         </template>
         <p class="aqxy">我已阅读并同意 <a>《安全协议》</a></p>
       </van-checkbox>
-      <van-button
-        v-if="!islookCard"
-        class="buttontext img_animes"
-        style="margin: 8px 0"
-        size="small"
-        round
-        block
-        @click="payVipOrder"
-        >立即购买</van-button
-      >
-      <van-button
-        v-if="islookCard"
-        size="small"
-        style="margin: 8px 0"
-        round
-        block
-        class="buttontext img_animes"
-        @click="lookCard"
-        >立即查看</van-button
-      >
+      <van-button class="buttontext img_animes" round block @click="payVipOrder">立即购买</van-button>
+      <!-- <van-button v-if="!islookCard" round block class="buttontext img_animes" @click="lookCard">立即查看</van-button> -->
+      <!-- <van-button round block class="buttontext" size="small" @click="lookplayList"></van-button> -->
+      <div class="myplay" @click="lookplayList">我的购票记录</div>
     </div>
     <!-- 安全协议 -->
     <van-popup :lazy-render="false" get-container="index-container" v-model="show" round @click-overlay="overlay">
       <div class="lookpage" v-show="!is_pay">
-        <div class="title" style="font-weight: 600">空之橙入场须知</div>
-        <div style="line-height: 1.5; flex: 1; margin: 10px 0">
-          <p>1、进入天空之橙需购票，20元/人，一人一票，门票单次有效，凭票扫码入场</p>
-          <p>2、本道闸为自动转闸机，入场请向“扫码口”出示您的购票二维码，方可推门进入</p>
-          <p>
-            3、请您注意安全警示，遵守游览秩序，请勿攀爬、翻越安全防护栏；未经许可，请勿进入非对外开放的空间区域；请勿拥挤打闹，上下石级时，要小心谨慎
-          </p>
-          <p>4、注意保管好随身携带的物品 5、请勿携带宠物进入天空之橙</p>
-          <p>
-            6、未经允许，禁止专业拍摄/商业拍摄/大型拍摄（禁止除手机以外的其他拍摄三脚架、稳定器、换装、化妆师补妆都是不ok的哦~感谢配合）如有拍摄需求，请恰17864211712（小爱同学）
-          </p>
-          <p>7、茶室、餐食预约电话 TEL.18917769185（MAX）</p>
-          <p>8、如有场地、商务合作等其他需求请拨打电话 TEL.18917769179（小爱同学）或求助附近的工作人员</p>
-          <p>9、天空之橙营业时间为09:00-22:00</p>
-          <!--  -->
-          <van-button
-            type="primary"
-            color="#DC5317"
-            :disabled="time > 0"
-            style="margin: 16px 0"
-            block
-            @click="mylook"
-            size="small"
-            >我已阅读并同意《安全协议》{{ time > 0 ? time + '秒' : '' }}</van-button
-          >
-        </div>
+        <Gtext />
+        <!--  -->
+        <van-button
+          type="primary"
+          color="#DC5317"
+          :disabled="time > 0"
+          style="margin: 16px 0"
+          block
+          @click="mylook"
+          size="small"
+          >我已阅读并同意《安全协议》{{ time > 0 ? time + '秒' : '' }}</van-button
+        >
       </div>
       <div class="codepage" v-show="is_pay">
-        <p>购买成功请截图，只能使用一次</p>
+        <p>购买成功</p>
         <div id="qrcode" ref="qrcode"></div>
-        <p>退出无法查看！</p>
+        <p>验证后失效</p>
+      </div>
+    </van-popup>
+
+    <!-- 我的记录  -->
+    <van-popup :lazy-render="false" get-container="index-container" v-model="myplayshow" round @click-overlay="overlay">
+      <div class="list">
+        <p class="list_ttle">购买记录</p>
+        <div class="block" v-if="mylist.length > 0" v-for="item in mylist" :key="item.id">
+          <div>
+            <p class="order_no">
+              {{ item.order_no }}
+            </p>
+            <p>
+              {{ item.create_time }}
+            </p>
+          </div>
+          <p></p>
+          <p :class="item.status == 1 ? 'buttonlook' : 'buttonlook nolook'" @click="mylookCode(item)">查看</p>
+        </div>
+        <div v-if="mylist.length <= 0">
+          <van-empty description="暂无订单" />
+        </div>
       </div>
     </van-popup>
   </div>
@@ -82,10 +74,17 @@ import QRCode from 'qrcodejs2'
 import { setToken, getToken } from '@/utils/loaclStting.js'
 import { overdueToken } from '@/utils/wxload.js'
 import { Toast } from 'vant'
+import Gtext from '@/components/Gtext.vue'
 
 export default {
+  components: {
+    Gtext
+  },
   data() {
     return {
+      qrcodecreated: null,
+      mylist: [],
+      myplayshow: false,
       activeIcon: require('@/assets/activeIcon.png'),
       inactiveIcon: require('@/assets/inactiveIcon.png'),
       isVip: false,
@@ -105,6 +104,25 @@ export default {
 
   mounted() {},
   methods: {
+    mylookCode(data) {
+      if (data.status != 1) {
+        Toast.fail('已使用')
+        return
+      }
+      let text = `${data.order_no}-${this.userInfo.vip_code}`
+      this.qrcodecreated.clear() // 清除二维码
+      this.qrcodecreated.makeCode(text) // 也可以调用方法生成二维码，好处就是可以先清除在生成
+      this.is_pay = true
+      this.islookCard = true
+      this.show = true
+    },
+    lookplayList() {
+      this.Api.getUserOrder().then(res => {
+        console.log(res.data)
+        this.mylist = res.data
+        this.myplayshow = true
+      })
+    },
     lookCard() {
       if (!this.checked) {
         this.$toast.fail('请阅读安全协议')
@@ -146,6 +164,7 @@ export default {
         })
       }
     },
+    getUserOrder() {},
     payVipOrder() {
       if (!this.checked) {
         this.$toast.fail('请阅读安全协议')
@@ -190,154 +209,94 @@ export default {
       this.Api.queryTicketOrder({ out_trade_no: data })
         .then(res => {
           Toast.success('支付成功')
+          let text = `${data}-${this.userInfo.vip_code}`
+          this.qrcodecreated.clear() // 清除二维码
+          this.qrcodecreated.makeCode(text) // 也可以调用方法生成二维码，好处就是可以先清除在生成
           this.is_pay = true
           this.islookCard = true
           this.show = true
         })
         .catch(() => {
-          this.$wx.closeWindow()
+          console.log('支付失败')
+          Toast.fail('支付失败')
+          // this.$wx.closeWindow()
         })
     },
     qrcode() {
       let qrcodeName = this.$refs.qrcode
       console.log(qrcodeName)
       let text = this.userInfo.vip_code // 二维码地址
-      let qrcode = new QRCode(qrcodeName, {
+      this.qrcodecreated = new QRCode(qrcodeName, {
         render: 'canvas', //也可以替换为table
         width: 250,
         height: 250,
         colorDark: '#000',
         colorLight: '#fff'
       })
-      qrcode.clear() // 清除二维码
-      qrcode.makeCode(text) // 也可以调用方法生成二维码，好处就是可以先清除在生成
+      this.qrcodecreated.clear() // 清除二维码
+      this.qrcodecreated.makeCode(text) // 也可以调用方法生成二维码，好处就是可以先清除在生成
     }
   }
 }
 </script>
-
 <style lang="scss">
+@import '@/assets/css/formStyle.scss';
+.index-container {
+  background: #94908d;
+  .button {
+    bottom: 3.9rem;
+  }
+  .myplay {
+    color: #fff;
+    border-bottom: 1px solid #ff0000;
+    padding: 4px 0;
+  }
+  // 我的记录
+  .list {
+    width: 70vw;
+    height: 60vh;
+    padding: 10px 20px;
+    .list_ttle {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .block {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #dbdbdd;
+      padding: 10px 0;
+      margin-top: 10px;
+      font-size: 12px;
+      line-height: 1.5;
+      .order_no {
+        font-weight: bold;
+      }
+      .buttonlook {
+        padding: 4px 16px;
+        font-size: 12px;
+        border: 1px solid #ec6925;
+        border-radius: 30px;
+        color: #ec6925;
+      }
+      .nolook {
+        border: 1px solid #ccc;
+        color: #ccc;
+      }
+    }
+  }
+}
 .codepage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100%;
-  padding: 14px;
+  padding: 10px 20px;
   p {
     color: #ff0000;
-    font-weight: 600;
-    padding: 8px 0;
-  }
-}
-</style>
-
-<style lang="scss" scoped>
-.index-container {
-  width: 100%;
-  min-height: 100%;
-  // height: 100%;
-  background: #94908d;
-  // overflow: hidden;
-  position: relative;
-  .headerImg {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-  .header {
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .content {
-    padding: 20px;
-    h2 {
-      font-size: 24px;
-      letter-spacing: 2px;
-      line-height: 2;
-    }
-    h5 {
-      letter-spacing: 2px;
-      line-height: 2;
-    }
-    .desc {
-      margin-top: 20px;
-    }
-    p {
-      // padding: 10px 0;
-      // letter-spacing: 4px;
-      font-size: 14px;
-      line-height: 2;
-    }
-  }
-  .bottom {
-    padding-bottom: 80px;
-  }
-  .button {
-    position: absolute;
-    bottom: 4.93333rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 0 40px;
-    box-sizing: border-box;
-    width: 100%;
-    color: #dc5317;
-  }
-  // 安全协议
-  .aqxy {
-    font-size: 14px;
-    color: #fff;
     text-align: center;
-    width: 100%;
-    a {
-      // color: #de6129;
-    }
+    padding: 14px 0;
   }
-  // 看
-  .lookpage {
-    width: 86vw;
-    height: 86vh;
-    box-sizing: border-box;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-    p {
-      flex: 1;
-    }
-  }
-}
-</style>
-<style lang="scss">
-.buttontext {
-  color: #dc5317;
-  margin-top: 4px;
-}
-// .img_animes {
-//   animation: scaleDrew 2s ease-in-out infinite;
-// }
-/* 按钮动画效果 */
-.img_animes {
-  -webkit-animation: free_download 1s linear alternate infinite;
-  animation: free_download 1s linear alternate infinite;
-}
-@-webkit-keyframes free_download {
-  0% {
-    -webkit-transform: scale(0.9);
-  }
-  100% {
-    -webkit-transform: scale(1);
-  }
-}
-@keyframes free_download {
-  0% {
-    transform: scale(0.9);
-  }
-  100% {
-    transform: scale(1);
+  .qrcode {
+    width: 250px;
+    height: 250px;
   }
 }
 </style>

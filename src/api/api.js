@@ -17,7 +17,10 @@ const api = {
   upCardImage: '/upCardImage',
   authUserInfo: '/authUserInfo',
   getQiShu: '/getQiShu', //获取期数
-  receiveVip: '/receiveVip'
+  receiveVip: '/receiveVip',
+  getUserOrder: '/getUserOrder',
+  createSkybeerCode: '/createSkybeerCode',
+  receiveSkyBeerVip: '/receiveSkyBeerVip'
 }
 
 export default api

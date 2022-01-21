@@ -15,46 +15,13 @@
         </template>
         <p class="aqxy">我已阅读并同意 <a>《安全协议》</a></p>
       </van-checkbox>
-      <van-button
-        v-if="!isVip"
-        class="buttontext img_animes"
-        style="margin: 6px 0"
-        size="small"
-        round
-        block
-        @click="payVipOrder"
-        >立即购买</van-button
-      >
-      <van-button
-        v-if="isVip"
-        round
-        block
-        size="small"
-        style="margin: 6px 0"
-        class="buttontext img_animes"
-        @click="addCard"
-        >立即领取</van-button
-      >
+      <van-button v-if="!isVip" class="buttontext img_animes" round block @click="payVipOrder">立即购买</van-button>
+      <van-button v-if="isVip" round block class="buttontext img_animes" @click="addCard">立即领取</van-button>
     </div>
     <!-- 安全协议 -->
     <van-popup :lazy-render="false" get-container="index-container" v-model="show" round @click-overlay="overlay">
       <div class="lookpage">
-        <div class="title" style="font-weight: 600">空之橙入场须知</div>
-        <div style="line-height: 1.5; flex: 1; margin: 10px 0">
-          <p>1、进入天空之橙需购票，20元/人，一人一票，门票单次有效，凭票扫码入场</p>
-          <p>2、本道闸为自动转闸机，入场请向“扫码口”出示您的购票二维码，方可推门进入</p>
-          <p>
-            3、请您注意安全警示，遵守游览秩序，请勿攀爬、翻越安全防护栏；未经许可，请勿进入非对外开放的空间区域；请勿拥挤打闹，上下石级时，要小心谨慎
-          </p>
-          <p>4、注意保管好随身携带的物品 5、请勿携带宠物进入天空之橙</p>
-          <p>
-            6、未经允许，禁止专业拍摄/商业拍摄/大型拍摄（禁止除手机以外的其他拍摄三脚架、稳定器、换装、化妆师补妆都是不ok的哦~感谢配合）如有拍摄需求，请恰17864211712（小爱同学）
-          </p>
-          <p>7、茶室、餐食预约电话 TEL.18917769185（MAX</p>
-          <p>8、如有场地、商务合作等其他需求请拨打电话 TEL.18917769179（小爱同学）或求助附近的工作人员</p>
-          <p>9、天空之橙营业时间为09:00-22:00</p>
-        </div>
-        <!--  -->
+        <Gtext />
         <van-button
           type="primary"
           color="#DC5317"
@@ -76,12 +43,16 @@ import { setToken, getToken } from '@/utils/loaclStting.js'
 import { overdueToken } from '@/utils/wxload.js'
 import { compareArray } from '@/utils/comp'
 import { Toast } from 'vant'
+import Gtext from '@/components/Gtext.vue'
 export default {
+  components: {
+    Gtext
+  },
   data() {
     return {
       activeIcon: require('@/assets/activeIcon.png'),
       inactiveIcon: require('@/assets/inactiveIcon.png'),
-      isVip: false,
+      // isVip: false,
       time: 5,
       timeT: null,
       islookCard: false,
@@ -301,111 +272,6 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-.index-container {
-  width: 100%;
-  min-height: 100%;
-  // height: 100%;
-  background: #dc5317;
-  // overflow: hidden;
-  position: relative;
-  .headerImg {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-  .header {
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .content {
-    padding: 20px;
-    h2 {
-      font-size: 24px;
-      letter-spacing: 2px;
-      line-height: 2;
-    }
-    h5 {
-      letter-spacing: 2px;
-      line-height: 2;
-    }
-    .desc {
-      margin-top: 20px;
-    }
-    p {
-      // padding: 10px 0;
-      // letter-spacing: 4px;
-      font-size: 14px;
-      line-height: 2;
-    }
-  }
-  .bottom {
-    padding-bottom: 80px;
-  }
-  .button {
-    position: absolute;
-    bottom: 2.93333rem;
-    padding: 0 40px;
-    box-sizing: border-box;
-    width: 100%;
-    color: #dc5317;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  // 安全协议
-  .aqxy {
-    font-size: 14px;
-    color: #fff;
-    text-align: center;
-    width: 100%;
-    a {
-      // color: #de6129;
-    }
-  }
-  // 看
-  .lookpage {
-    width: 86vw;
-    height: 86vh;
-    box-sizing: border-box;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-    p {
-      flex: 1;
-    }
-  }
-}
-</style>
 <style lang="scss">
-.buttontext {
-  color: #dc5317;
-}
-// .img_animes {
-//   animation: scaleDrew 2s ease-in-out infinite;
-// }
-/* 按钮动画效果 */
-.img_animes {
-  -webkit-animation: free_download 1s linear alternate infinite;
-  animation: free_download 1s linear alternate infinite;
-}
-@-webkit-keyframes free_download {
-  0% {
-    -webkit-transform: scale(0.9);
-  }
-  100% {
-    -webkit-transform: scale(1);
-  }
-}
-@keyframes free_download {
-  0% {
-    transform: scale(0.9);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
+@import '@/assets/css/formStyle.scss';
 </style>

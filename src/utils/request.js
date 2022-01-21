@@ -25,7 +25,7 @@ service.interceptors.request.use(
       })
     }
     // setToken(
-    //   'ffc3035f1e0b183a4101e0cb87b2a950038453f676abdc046bb4f6e9edc34a6554051cbe4b40495e1d826921a7ddbc995e872b9b4c2f995ace6e2a974eec55a55726b9ee532fdb4a01e6449788adc7ce'
+    //   'ad2b0bd829e6e4fe554bc9ab4e2fac0fa0043fab8594d44d5c69b8f9bcb124bc59224e6e5909441b14cddddbf6b46d615e872b9b4c2f995ace6e2a974eec55a55726b9ee532fdb4a01e6449788adc7ce'
     // )
     config.headers['app-type'] = 'ios'
     if (getToken()) {

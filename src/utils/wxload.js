@@ -1,11 +1,6 @@
 // 转译url
-import {
-  APPID
-} from '@/config'
-import {
-  setToken,
-  getToken
-} from '@/utils/loaclStting.js'
+import { APPID } from '@/config'
+import { setToken, getToken } from '@/utils/loaclStting.js'
 import API from '@/api/index'
 
 export function UrlCode(url) {
@@ -19,18 +14,24 @@ export function UrlCode(url) {
 // 获取 code
 export function getUrlKey(name) {
   return (
-    decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ''])[1].replace(/\+/g, '%20')) ||
-    null
+    decodeURIComponent(
+      (new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ''])[1].replace(/\+/g, '%20')
+    ) || null
   )
 }
 // 微信登录过期
 export function overdueToken() {
-  let code = getUrlKey("code")
+  let code = getUrlKey('code')
+  let vipcode = getUrlKey('vipcode')
   if (code) {
     API.login({
       code
     }).then(res => {
       setToken(res.data.token)
+      if (vipcode) {
+        window.location.replace(`${window.location.origin}${window.location.pathname}?vipcode=${vipcode}`)
+        return
+      }
       window.location.replace(window.location.origin + window.location.pathname)
     })
   } else {

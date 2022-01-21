@@ -18,6 +18,7 @@ import {
   Field,
   SwipeItem,
   Uploader,
+  Empty,
   Form,
   Image as VanImage,
   Progress,
@@ -26,6 +27,7 @@ import {
 } from 'vant'
 
 Vue.use(Checkbox)
+Vue.use(Empty)
 Vue.use(CheckboxGroup)
 Vue.use(Button)
 Vue.use(Form)

@@ -2,6 +2,8 @@
  * 基础路由
  * @type { *[] }
  */
+import { getShareInfo } from '@/utils/share.js'
+
 export const constantRouterMap = [
   {
     path: '/',
@@ -20,11 +22,25 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/admin',
+    component: () => import('@/views/admin/index.vue'),
+    meta: {
+      title: '管理员页面',
+      keepAlive: false
+    }
+  },
+
+  {
     path: '/codepage',
     component: () => import('@/views/codePage/index.vue'),
     meta: {
-      title: '单次购买',
+      title: '天空之橙双创艺术空间',
       keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      // ...
+      console.log(to, from, '天空之橙双创艺术空间')
+      next()
     }
   },
   {
@@ -32,6 +48,14 @@ export const constantRouterMap = [
     component: () => import('@/views/newyears/newyears.vue'),
     meta: {
       title: '春节特权卡',
+      keepAlive: false
+    }
+  },
+  {
+    path: '/giveshop',
+    component: () => import('@/views/giveshop/giveshop.vue'),
+    meta: {
+      title: '天空之橙会员卡',
       keepAlive: false
     }
   },

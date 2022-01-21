@@ -161,3 +161,27 @@ export function receiveVip(data) {
     hideloading: true
   })
 }
+export function receiveSkyBeerVip(params) {
+  return request({
+    url: api.receiveSkyBeerVip,
+    method: 'get',
+    params,
+    hideloading: true
+  })
+}
+export function getUserOrder(data) {
+  return request({
+    url: api.getUserOrder,
+    method: 'get',
+    data,
+    hideloading: true
+  })
+}
+export function createSkybeerCode(data) {
+  return request({
+    url: api.createSkybeerCode,
+    method: 'get',
+    data,
+    hideloading: true
+  })
+}
