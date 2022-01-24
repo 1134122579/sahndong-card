@@ -5,7 +5,7 @@ export default function (router) {
     console.log(to)
     document.title = to.meta.title
     if (to.path != '/receide') {
-      if (to.path != '/newyears') {
+      if (to.path == '/newyears') {
         let wxConfig = {
           title: '@所有人 速抢！天空之橙春节特权卡！',
           desc: '免费领取春节特权卡',

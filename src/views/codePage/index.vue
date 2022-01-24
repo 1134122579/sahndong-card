@@ -42,6 +42,7 @@
       <div class="codepage" v-show="is_pay">
         <p>购买成功</p>
         <div id="qrcode" ref="qrcode"></div>
+        <p>请将本二维码对准下方摄像头</p>
         <p>验证后失效</p>
       </div>
     </van-popup>
@@ -109,7 +110,7 @@ export default {
         Toast.fail('已使用')
         return
       }
-      let text = `${data.order_no}-${this.userInfo.vip_code}`
+      let text = `${this.userInfo.vip_code}-${data.order_no}`
       this.qrcodecreated.clear() // 清除二维码
       this.qrcodecreated.makeCode(text) // 也可以调用方法生成二维码，好处就是可以先清除在生成
       this.is_pay = true
@@ -209,7 +210,7 @@ export default {
       this.Api.queryTicketOrder({ out_trade_no: data })
         .then(res => {
           Toast.success('支付成功')
-          let text = `${data}-${this.userInfo.vip_code}`
+          let text = `${this.userInfo.vip_code}-${data}`
           this.qrcodecreated.clear() // 清除二维码
           this.qrcodecreated.makeCode(text) // 也可以调用方法生成二维码，好处就是可以先清除在生成
           this.is_pay = true
@@ -292,11 +293,16 @@ export default {
   p {
     color: #ff0000;
     text-align: center;
-    padding: 14px 0;
+    // padding: 14px 0;
+    line-height: 1.6;
   }
   .qrcode {
     width: 250px;
     height: 250px;
+    margin: 0.33rem 0;
+  }
+  #qrcode {
+    margin: 0.33rem;
   }
 }
 </style>
