@@ -26,7 +26,14 @@ function getShareInfo(wxConfig, callback) {
         timestamp: timestamp, // 必填，生成签名的时间戳，刚才接口拿到的数据
         nonceStr: nonceStr, // 必填，生成签名的随机串
         signature: signature, // 必填，签名，见附录1
-        jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'chooseCard', 'addCard'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        jsApiList: [
+          'updateAppMessageShareData',
+          'updateTimelineShareData',
+          'chooseCard',
+          'addCard',
+          'playVoice',
+          'downloadVoice'
+        ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
       })
       wx.ready(function () {
         wx.updateAppMessageShareData(wxConfig)

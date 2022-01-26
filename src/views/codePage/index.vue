@@ -19,12 +19,18 @@
         <p class="aqxy">我已阅读并同意 <a>《安全协议》</a></p>
       </van-checkbox>
       <van-button class="buttontext img_animes" round block @click="payVipOrder">立即购买</van-button>
-      <!-- <van-button v-if="!islookCard" round block class="buttontext img_animes" @click="lookCard">立即查看</van-button> -->
-      <!-- <van-button round block class="buttontext" size="small" @click="lookplayList"></van-button> -->
       <div class="myplay" @click="lookplayList">我的购票记录</div>
     </div>
     <!-- 安全协议 -->
-    <van-popup :lazy-render="false" get-container="index-container" v-model="show" round @click-overlay="overlay">
+    <van-popup
+      :lazy-render="false"
+      get-container="index-container"
+      v-model="show"
+      round
+      closeable
+      @click-overlay="overlay"
+      :close-on-click-overlay="false"
+    >
       <div class="lookpage" v-show="!is_pay">
         <Gtext />
         <!--  -->
@@ -41,14 +47,22 @@
       </div>
       <div class="codepage" v-show="is_pay">
         <p>购买成功</p>
-        <div id="qrcode" ref="qrcode"></div>
         <p>请将本二维码对准下方摄像头</p>
+        <div id="qrcode" ref="qrcode"></div>
         <p>验证后失效</p>
       </div>
     </van-popup>
 
     <!-- 我的记录  -->
-    <van-popup :lazy-render="false" get-container="index-container" v-model="myplayshow" round @click-overlay="overlay">
+    <van-popup
+      :lazy-render="false"
+      get-container="index-container"
+      v-model="myplayshow"
+      round
+      closeable
+      @click-overlay="overlay"
+      :close-on-click-overlay="false"
+    >
       <div class="list">
         <p class="list_ttle">购买记录</p>
         <div class="block" v-if="mylist.length > 0" v-for="item in mylist" :key="item.id">
@@ -68,6 +82,14 @@
         </div>
       </div>
     </van-popup>
+    <audio
+      ref="audio"
+      preload="auto"
+      loop
+      src="https://voiceintelligent-1253824635.file.myqcloud.com/voiceintelligent/2022/01/fde7a5e3-24fc-4c2e-8f74-f460cc302b3c.mp3"
+    >
+      您的浏览器不支持 audio 元素。
+    </audio>
   </div>
 </template>
 <script>
@@ -80,6 +102,11 @@ import Gtext from '@/components/Gtext.vue'
 export default {
   components: {
     Gtext
+  },
+  watch: {
+    show(newV, oldV) {
+      !newV && this.$refs['audio'].load()
+    }
   },
   data() {
     return {
@@ -134,6 +161,7 @@ export default {
     },
     overlay() {
       console.log(14)
+      return
       this.show = false
     },
     mylook() {
@@ -167,6 +195,36 @@ export default {
     },
     getUserOrder() {},
     payVipOrder() {
+      let text = `${this.userInfo.vip_code}-模拟假数据`
+      this.qrcodecreated.clear() // 清除二维码
+      this.qrcodecreated.makeCode(text) // 也可以调用方法生成二维码，好处就是可以先清除在生成
+      this.is_pay = true
+      this.islookCard = true
+      this.show = true
+      let that1 = this
+      this.$refs['audio'].play()
+      return
+      that1.$wx.ready(() => {
+        // that1.$wx.startRecord()
+        that1.$wx.downloadVoice({
+          url: 'https://voiceintelligent-1253824635.file.myqcloud.com/voiceintelligent/2022/01/8a25eb03-a5fd-4179-bb7e-4385d4988a0b.mp3', //仅为示例，并非真实的资源
+          success: function (res) {
+            that1.$wx.playVoice({
+              filePath: res.tempFilePath
+            })
+          }
+        })
+        return
+
+        that1.$wx.playVoice({
+          localId:
+            'https://voiceintelligent-1253824635.file.myqcloud.com/voiceintelligent/2022/01/8a25eb03-a5fd-4179-bb7e-4385d4988a0b.mp3',
+          complete(res) {
+            console.log(res)
+          }
+        })
+      })
+      return
       if (!this.checked) {
         this.$toast.fail('请阅读安全协议')
         return
