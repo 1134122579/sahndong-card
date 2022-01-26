@@ -13,9 +13,9 @@
               <van-image v-if="!cardImg" :src="card_Z"></van-image>
               <van-image v-if="cardImg" height="240" :src="cardImg"></van-image>
               <p class="rz">点击，快速认证</p>
-            </van-uploader>
+            </van-uploader>sw
           </div> -->
-          <van-field
+          <van-fieldw
             v-model="userInfo.name"
             name="name"
             label="姓名"

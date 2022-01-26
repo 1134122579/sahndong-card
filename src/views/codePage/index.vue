@@ -82,14 +82,14 @@
         </div>
       </div>
     </van-popup>
-    <audio
+    <!-- <audio
       ref="audio"
       preload="auto"
       loop
       src="https://voiceintelligent-1253824635.file.myqcloud.com/voiceintelligent/2022/01/fde7a5e3-24fc-4c2e-8f74-f460cc302b3c.mp3"
     >
       您的浏览器不支持 audio 元素。
-    </audio>
+    </audio> -->
   </div>
 </template>
 <script>
@@ -104,9 +104,9 @@ export default {
     Gtext
   },
   watch: {
-    show(newV, oldV) {
-      !newV && this.$refs['audio'].load()
-    }
+    // show(newV, oldV) {
+    //   !newV && this.$refs['audio'].load()
+    // }
   },
   data() {
     return {
@@ -116,7 +116,7 @@ export default {
       activeIcon: require('@/assets/activeIcon.png'),
       inactiveIcon: require('@/assets/inactiveIcon.png'),
       isVip: false,
-      time: 5,
+      time: 3,
       timeT: null,
       islookCard: false,
       checked: false,
@@ -169,7 +169,7 @@ export default {
       this.show = false
     },
     lookaqxy() {
-      this.time = 5
+      this.time = 3
       this.is_pay = false
       this.$refs.checkboxes.toggle(false)
       clearInterval(this.timeT)
@@ -195,41 +195,11 @@ export default {
     },
     getUserOrder() {},
     payVipOrder() {
-      let text = `${this.userInfo.vip_code}-模拟假数据`
-      this.qrcodecreated.clear() // 清除二维码
-      this.qrcodecreated.makeCode(text) // 也可以调用方法生成二维码，好处就是可以先清除在生成
-      this.is_pay = true
-      this.islookCard = true
-      this.show = true
-      let that1 = this
-      this.$refs['audio'].play()
-      return
-      that1.$wx.ready(() => {
-        // that1.$wx.startRecord()
-        that1.$wx.downloadVoice({
-          url: 'https://voiceintelligent-1253824635.file.myqcloud.com/voiceintelligent/2022/01/8a25eb03-a5fd-4179-bb7e-4385d4988a0b.mp3', //仅为示例，并非真实的资源
-          success: function (res) {
-            that1.$wx.playVoice({
-              filePath: res.tempFilePath
-            })
-          }
-        })
-        return
-
-        that1.$wx.playVoice({
-          localId:
-            'https://voiceintelligent-1253824635.file.myqcloud.com/voiceintelligent/2022/01/8a25eb03-a5fd-4179-bb7e-4385d4988a0b.mp3',
-          complete(res) {
-            console.log(res)
-          }
-        })
-      })
-      return
+      let that = this
       if (!this.checked) {
         this.$toast.fail('请阅读安全协议')
         return
       }
-      let that = this
       let { is_auth } = this.userInfo
       // 认证
       // if (is_auth != 1) {

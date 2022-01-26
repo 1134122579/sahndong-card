@@ -3,7 +3,7 @@
   <div class="index-container">
     <img src="../../assets/years.png" class="headerImg" />
     <div class="button">
-      <van-checkbox v-model="checked" ref="checkboxes" checked-color="#ff0000" @click="lookaqxy" icon-size="16px">
+      <van-checkbox v-model="checked" ref="checkboxes" label-disabled checked-color="#ff0000" icon-size="16px">
         <template #icon="props">
           <div style="margin-top: -1px">
             <img
@@ -13,13 +13,20 @@
             />
           </div>
         </template>
-        <p class="aqxy">我已阅读并同意 <a>《安全协议》</a></p>
+        <p class="aqxy" @click="lookaqxy">我已阅读并同意 <a>《安全协议》</a></p>
       </van-checkbox>
       <van-button v-if="!isVip" class="buttontext img_animes" round block @click="payVipOrder">立即购买</van-button>
       <van-button v-if="isVip" round block class="buttontext img_animes" @click="addCard">立即领取</van-button>
     </div>
     <!-- 安全协议 -->
-    <van-popup :lazy-render="false" get-container="index-container" v-model="show" round @click-overlay="overlay">
+    <van-popup
+      :lazy-render="false"
+      closeable
+      get-container="index-container"
+      v-model="show"
+      round
+      @click-overlay="overlay"
+    >
       <div class="lookpage">
         <Gtext />
         <van-button
@@ -53,7 +60,7 @@ export default {
       activeIcon: require('@/assets/activeIcon.png'),
       inactiveIcon: require('@/assets/inactiveIcon.png'),
       // isVip: false,
-      time: 5,
+      time: 3,
       timeT: null,
       islookCard: false,
       checked: false,
@@ -72,12 +79,18 @@ export default {
       QM: ''
     }
   },
+  watch: {
+    checked(v, o) {
+      v ? sessionStorage.setItem('CHECK', v) : sessionStorage.removeItem('CHECK')
+    }
+  },
   computed: {
     isVip() {
       return this.userInfo.vip_time_out >= +new Date() / 1000 && this.userInfo.vip_time_out >= 1609689600
     }
   },
   created() {
+    this.checked = sessionStorage.getItem('CHECK')
     if (!getToken()) {
       overdueToken()
     } else {
@@ -107,9 +120,9 @@ export default {
       this.show = false
     },
     lookaqxy() {
-      this.time = 5
+      this.time = 3
       this.is_pay = false
-      this.$refs.checkboxes.toggle(false)
+      // this.$refs.checkboxes.toggle(false)
       clearInterval(this.timeT)
       this.timeT = setInterval(() => {
         this.time--

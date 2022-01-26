@@ -3,7 +3,7 @@
   <div class="index-container">
     <img src="http://mfyfile.greatorange.cn/newyear1.png" class="headerImg" />
     <div class="button">
-      <van-checkbox v-model="checked" ref="checkboxes" checked-color="#ff0000" @click="lookaqxy" icon-size="16px">
+      <van-checkbox v-model="checked" ref="checkboxes" label-disabled checked-color="#ff0000" icon-size="16px">
         <template #icon="props">
           <div style="margin-top: -1px">
             <img
@@ -13,13 +13,20 @@
             />
           </div>
         </template>
-        <p class="aqxy">我已阅读并同意 <a>《安全协议》</a></p>
+        <p class="aqxy" @click="lookaqxy">我已阅读并同意 <a>《安全协议》</a></p>
       </van-checkbox>
       <van-button v-if="!isVip" class="buttontext img_animes" round block @click="receiveVip">立即领取</van-button>
       <van-button v-if="isVip" class="buttontext img_animes" round block @click="addCard">立即查看</van-button>
     </div>
     <!-- 安全协议 -->
-    <van-popup :lazy-render="false" get-container="index-container" v-model="show" round @click-overlay="overlay">
+    <van-popup
+      closeable
+      :lazy-render="false"
+      get-container="index-container"
+      v-model="show"
+      round
+      @click-overlay="overlay"
+    >
       <div class="lookpage">
         <Gtext />
         <van-button
@@ -50,7 +57,7 @@ export default {
       activeIcon: require('@/assets/activeIcon.png'),
       inactiveIcon: require('@/assets/inactiveIcon.png'),
       isVip: false,
-      time: 5,
+      time: 3,
       timeT: null,
       islookCard: false,
       checked: false,
@@ -109,9 +116,8 @@ export default {
       this.show = false
     },
     lookaqxy() {
-      this.time = 5
+      this.time = 3
       this.is_pay = false
-      this.$refs.checkboxes.toggle(false)
       clearInterval(this.timeT)
       this.timeT = setInterval(() => {
         this.time--
