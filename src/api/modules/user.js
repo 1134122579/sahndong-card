@@ -185,3 +185,11 @@ export function createSkybeerCode(data) {
     hideloading: true
   })
 }
+export function checkYearVip(data) {
+  return request({
+    url: api.checkYearVip,
+    method: 'get',
+    data,
+    hideloading: true
+  })
+}

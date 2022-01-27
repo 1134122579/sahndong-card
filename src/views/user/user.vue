@@ -15,7 +15,7 @@
               <p class="rz">点击，快速认证</p>
             </van-uploader>sw
           </div> -->
-          <van-fieldw
+          <van-field
             v-model="userInfo.name"
             name="name"
             label="姓名"
@@ -32,7 +32,7 @@
             required
             :rules="[{ required: true }]"
           />
-          <van-field v-model="userInfo.idcard" name="idcard" label="身份证" placeholder="请输入身份证" />
+          <!-- <van-field v-model="userInfo.idcard" name="idcard" label="身份证" placeholder="请输入身份证" /> -->
           <!-- <van-field
           v-model="userInfo.address"
           name="address"

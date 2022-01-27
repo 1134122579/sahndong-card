@@ -13,7 +13,7 @@
             />
           </div>
         </template>
-        <p class="aqxy" @click="lookaqxy">我已阅读并同意 <a>《安全协议》</a></p>
+        <p class="aqxy" @click="lookaqxy">我已阅读并同意 <a style="color: #0c5ffe">《安全协议》</a></p>
       </van-checkbox>
       <van-button v-if="!isVip" class="buttontext img_animes" round block @click="receiveVip">立即领取</van-button>
       <van-button v-if="isVip" class="buttontext img_animes" round block @click="addCard">立即查看</van-button>
@@ -29,7 +29,10 @@
     >
       <div class="lookpage">
         <Gtext />
-        <van-button
+        <van-button type="primary" color="#DC5317" style="margin: 16px 0" block @click="mylook" size="small"
+          >我已阅读并同意《安全协议》</van-button
+        >
+        <!-- <van-button
           type="primary"
           color="#DC5317"
           :disabled="time > 0"
@@ -38,7 +41,7 @@
           @click="mylook"
           size="small"
           >我已阅读并同意《安全协议》{{ time > 0 ? time + '秒' : '' }}</van-button
-        >
+        > -->
       </div>
     </van-popup>
   </div>

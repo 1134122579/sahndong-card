@@ -13,7 +13,7 @@
             />
           </div>
         </template>
-        <p class="aqxy" @click="lookaqxy">我已阅读并同意 <a>《安全协议》</a></p>
+        <p class="aqxy" @click="lookaqxy">我已阅读并同意 <a style="color: #0c5ffe">《安全协议》</a></p>
       </van-checkbox>
       <van-button v-if="!isVip" class="buttontext img_animes" round block @click="payVipOrder">立即购买</van-button>
       <van-button v-if="isVip" round block class="buttontext img_animes" @click="addCard">立即领取</van-button>
@@ -29,7 +29,10 @@
     >
       <div class="lookpage">
         <Gtext />
-        <van-button
+        <van-button type="primary" color="#DC5317" style="margin: 16px 0" block @click="mylook" size="small"
+          >我已阅读并同意《安全协议》</van-button
+        >
+        <!-- <van-button
           type="primary"
           color="#DC5317"
           :disabled="time > 0"
@@ -38,7 +41,7 @@
           @click="mylook"
           size="small"
           >我已阅读并同意《安全协议》{{ time > 0 ? time + '秒' : '' }}</van-button
-        >
+        > -->
       </div>
     </van-popup>
   </div>
@@ -59,7 +62,7 @@ export default {
     return {
       activeIcon: require('@/assets/activeIcon.png'),
       inactiveIcon: require('@/assets/inactiveIcon.png'),
-      // isVip: false,
+      isVip: false,
       time: 3,
       timeT: null,
       islookCard: false,
@@ -85,15 +88,16 @@ export default {
     }
   },
   computed: {
-    isVip() {
-      return this.userInfo.vip_time_out >= +new Date() / 1000 && this.userInfo.vip_time_out >= 1609689600
-    }
+    // isVip() {
+    //   return this.userInfo.vip_time_out >= +new Date() / 1000 && this.userInfo.vip_time_out >= 1609689600
+    // }
   },
   created() {
     this.checked = sessionStorage.getItem('CHECK')
     if (!getToken()) {
       overdueToken()
     } else {
+      this.checkYearVip()
       this.Api.getUserInfo().then(res => {
         this.userInfo = res.data
         console.log(this.userInfo)
@@ -103,6 +107,11 @@ export default {
   mounted() {},
 
   methods: {
+    async checkYearVip() {
+      let res = await this.Api.checkYearVip()
+      this.isVip = res.data.isYearVip == 1 ? true : false
+      console.log(res)
+    },
     lookCard() {
       if (!this.checked) {
         this.$toast.fail('请阅读安全协议')

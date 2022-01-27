@@ -20,7 +20,8 @@ const api = {
   receiveVip: '/receiveVip',
   getUserOrder: '/getUserOrder',
   createSkybeerCode: '/createSkybeerCode',
-  receiveSkyBeerVip: '/receiveSkyBeerVip'
+  receiveSkyBeerVip: '/receiveSkyBeerVip',
+  checkYearVip: '/checkYearVip' //检查年卡是否是会员
 }
 
 export default api

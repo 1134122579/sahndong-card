@@ -15,6 +15,7 @@ const service = axios.create({
 })
 
 // request拦截器 request interceptor
+
 service.interceptors.request.use(
   config => {
     // 不传递默认开启loading
@@ -25,7 +26,7 @@ service.interceptors.request.use(
       })
     }
     // setToken(
-    //   '8d77f9d94bd39dca9bef33b75e6cf541b9875c643fcb5c8afb06a51b05f4446673db4733b78568b745827d13f1457f235e872b9b4c2f995ace6e2a974eec55a55726b9ee532fdb4a01e6449788adc7ce'
+    //   'fb01910a52bd00445a424e5a3b757da94cee358a81360fa046dad65e3c9a247d6ea763e3202f64487c66afef14ecab52abe205aad8b8ae8039d27d4f9edcf5e7593c8eeb5f0d96d97a0a89b53cd2dfd6'
     // )
     config.headers['app-type'] = 'ios'
     if (getToken()) {
