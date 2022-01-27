@@ -52,6 +52,22 @@ export const constantRouterMap = [
     }
   },
   {
+    path: '/couponpage',
+    component: () => import('@/views/couponpage/index.vue'),
+    meta: {
+      title: '天空之橙抵扣券',
+      keepAlive: false
+    }
+  },
+  {
+    path: '/applypage',
+    component: () => import('@/views/applypage/index.vue'),
+    meta: {
+      title: '天空之橙券码核销',
+      keepAlive: false
+    }
+  },
+  {
     path: '/giveshop',
     component: () => import('@/views/giveshop/giveshop.vue'),
     meta: {
