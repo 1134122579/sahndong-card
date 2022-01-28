@@ -5,8 +5,10 @@
       <div class="coup_bg">
         <van-button class="buttontext img_animes" round block @click="ReceiveCoupon">立即领取</van-button>
       </div>
-      <p class="tagone">本券当日有效，每人每天限用一张</p>
-      <p>*如有疑问请咨询店内服务人员</p>
+      <div style="margin: 5px 0 10px">
+        <p class="tagone">本券当日有效，每人每天限用一张</p>
+        <p>*如有疑问请咨询店内服务人员</p>
+      </div>
       <div class="couponList">
         <div class="couponList_title">我的领取记录</div>
         <div class="couponList_nav">
@@ -19,14 +21,17 @@
             {{ item.name }}
           </p>
         </div>
-        <ul v-if="list.length > 0">
+        <ul v-if="list.length > 0" class="nullstyle">
           <li v-for="item in list" :key="item.id">
             <div class="content_list">
               <h5>{{ item.code }}</h5>
               <p>{{ item.create_time }}</p>
             </div>
-            <div class="shiyong" @click="iscodebutton(item.code, item)">
-              {{ item.status == 2 ? '未使用' : '暂未判断' }}
+            <div
+              :class="item.status == 2 ? (item.isshixiao ? 'shixiao shiyong' : 'shiyong') : 'shixiao shiyong'"
+              @click="iscodebutton(item.code, item)"
+            >
+              {{ item.status == 2 ? (item.isshixiao ? '已失效' : '未使用') : '已使用' }}
             </div>
           </li>
         </ul>
@@ -60,6 +65,7 @@ import { setToken, getToken } from '@/utils/loaclStting.js'
 import { overdueToken } from '@/utils/wxload.js'
 import { Toast } from 'vant'
 import Gtext from '@/components/Gtext.vue'
+import { parseTime } from '@/utils/index'
 
 export default {
   components: {
@@ -114,7 +120,16 @@ export default {
     // 获取列表
     getCouponLog() {
       this.Api.getCouponLog({ status: this.status }).then(res => {
-        console.log(res)
+        res.data = res.data.map(item => {
+          // new Date(parseTime(new Date(), '{y}/{m}/{d} {h}:{i}:{s}')).getTime()
+          item['isshixiao'] =
+            new Date(item['create_time'].replaceAll('-', '/')).getTime() >
+            new Date(parseTime(new Date(), '{y}/{m}/{d}') + ' 00:00:00')
+              ? false
+              : true
+          return item
+        })
+        console.log(res.data)
         this.list = res.data
       })
     },
@@ -127,6 +142,10 @@ export default {
     iscodebutton(coupon_code, item) {
       if (item && item.status == 1) {
         this.$toast.fail('已使用')
+        return
+      }
+      if (item.isshixiao) {
+        this.$toast.fail('已失效')
         return
       }
       let text = `${location.origin}/applypage?couponcode=${coupon_code}`
@@ -168,10 +187,11 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/assets/css/formStyle.scss';
 .index-container {
-  background: #94908d url('http://mfyfile.greatorange.cn/skyauth.png') no-repeat;
+  // background: #94908d url('http://mfyfile.greatorange.cn/skyauth.png') no-repeat;
+  background: #94908d url('../../assets/couponpage_bg.png') no-repeat;
   background-size: 100% auto;
   width: 100%;
   display: flex;
@@ -183,7 +203,7 @@ export default {
   // 领取
   .button_ {
     width: 100%;
-    margin-top: 190px;
+    margin-top: 2.76667rem;
     .coup_bg {
       background: url('../../assets/coupon_bg.png') no-repeat;
       background-size: 100% auto;
@@ -212,7 +232,7 @@ export default {
     }
     .couponList {
       display: flex;
-      justify-content: flex-end;
+      justify-content: flex-start;
       align-items: center;
       flex-direction: column;
       margin: 20px 10px 30px;
@@ -233,6 +253,8 @@ export default {
         box-sizing: border-box;
       }
       .couponList_nav {
+        flex-shrink: 0;
+        box-sizing: border-box;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -240,6 +262,7 @@ export default {
         padding: 4px;
         border-radius: 30px;
         margin-bottom: 10px;
+        box-sizing: border-box;
         p {
           border-radius: 30px;
           line-height: 2;
@@ -248,10 +271,11 @@ export default {
         .sur {
           background: #fff;
           color: #ec6925;
-          color: #595656;
+          // color: #595656;
         }
       }
       ul {
+        box-sizing: border-box;
         flex: 1;
         width: 100%;
         overflow-y: auto;
@@ -261,6 +285,7 @@ export default {
           padding: 5px 0;
           margin-bottom: 10px;
           justify-content: space-between;
+          align-items: center;
           border-bottom: 1px solid #eceaea;
           .content_list {
             color: #595656;
@@ -284,7 +309,7 @@ export default {
             height: 25px;
             line-height: 25px;
           }
-          .weishiyong {
+          .shixiao {
             color: #ccc;
             border: 1px solid #ccc;
           }
@@ -292,9 +317,8 @@ export default {
       }
       .nullstyle {
         flex: 1;
-        p {
-          color: #ccc;
-        }
+        box-sizing: border-box;
+        width: 100%;
       }
     }
   }

@@ -23,7 +23,8 @@ const api = {
   receiveSkyBeerVip: '/receiveSkyBeerVip',
   checkYearVip: '/checkYearVip', //检查年卡是否是会员
   ReceiveCoupon: '/ReceiveCoupon',
-  getCouponLog: '/getCouponLog'
+  getCouponLog: '/getCouponLog',
+  checkCoupon: '/checkCoupon'
 }
 
 export default api

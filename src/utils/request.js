@@ -53,14 +53,14 @@ service.interceptors.response.use(
       //   })
       // }
       if (res.status === 202) {
-        return Promise.reject(Toast.fail(res.message))
+        return Promise.reject(Toast(res.message))
       }
       // token过期
       if (res.status == 203) {
         overdueToken()
       }
       // Toast.fail(res.message)
-      return Promise.reject(Toast.fail(res.message))
+      return Promise.reject(Toast(res.message))
     } else {
       return Promise.resolve(res)
     }

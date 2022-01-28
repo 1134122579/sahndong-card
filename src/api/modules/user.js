@@ -209,3 +209,11 @@ export function getCouponLog(params) {
     hideloading: true
   })
 }
+export function checkCoupon(params) {
+  return request({
+    url: api.checkCoupon,
+    method: 'get',
+    params,
+    hideloading: true
+  })
+}

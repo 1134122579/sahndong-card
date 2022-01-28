@@ -1,13 +1,14 @@
 <template>
   <div class="index-container" id="index-container">
-    <img src="http://mfyfile.greatorange.cn/skyauth.png" class="headerImg" />
-    <div class="button">
+    <!-- <img src="" class="headerImg" /> -->
+    <div class="button_">
       <div class="codepage">
-        <p>券码核销</p>
+        <p class="codepage_title">抵扣券核销</p>
+        <div id="qrcodeqrcode" ref="qrcode"></div>
         <h4>
           {{ couponcode }}
         </h4>
-        <p>验证后失效</p>
+        <p>验证后失效！！</p>
         <van-button class="buttontext img_animes" round block @click="ReceiveCoupon">立即核销</van-button>
       </div>
     </div>
@@ -56,11 +57,13 @@ export default {
   mounted() {},
   methods: {
     ReceiveCoupon() {
-      this.$toast.success('已核销 ')
-
-      // this.Api.ReceiveCoupon().then(res => {
-      //   this.iscodebutton(res.data)
-      // })
+      if (res.data.is_admin != 1) {
+        this.$toast.fail('权限不足')
+        return
+      }
+      this.Api.checkCoupon({ code: this.couponcode }).then(res => {
+        this.$toast('已核销 ')
+      })
     },
     onePlay() {
       if (!getToken()) {
@@ -68,8 +71,14 @@ export default {
       } else {
         this.Api.getUserInfo().then(res => {
           this.userInfo = res.data
+          this.qrcode() //展示二维码
+          if (res.data.is_admin != 1) {
+            this.$router.push({
+              path: '/404'
+            })
+            return
+          }
           // this.payVipOrder()
-          // this.qrcode() //展示二维码
         })
       }
     },
@@ -77,8 +86,7 @@ export default {
     qrcode() {
       let qrcodeName = this.$refs.qrcode
       console.log(location)
-      let text = `${location.origin}/applypage?couponcode=${this.couponcode}`
-      // let text = this.userInfo.vip_code // 二维码地址
+      let text = `${this.couponcode}`
       this.qrcodecreated = new QRCode(qrcodeName, {
         render: 'canvas', //也可以替换为table
         width: 250,
@@ -92,29 +100,45 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/assets/css/formStyle.scss';
 .index-container {
-  background: #94908d;
-  overflow-y: hidden;
+  background: #94908d url('../../assets/couponpage_bg.png') no-repeat;
+  background-size: 100% auto;
   height: 100%;
-  .button {
-    top: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .button_ {
     .codepage {
       background: #fff;
-      padding: 10px 30px;
+      padding: 10px 40px;
       border-radius: 20px;
       text-align: center;
       line-height: 1.8;
       font-size: 16px;
-      #qrcode {
-        padding: 5px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #333;
+      .codepage_title {
+        font-size: 20px;
+        font-weight: 600;
+      }
+      #qrcodeqrcode {
+        // width: 260px;
+        // height: 260px;
+        margin: 10px 0;
+      }
+      h4 {
+        font-size: 18px;
+        font-weight: 600;
       }
     }
     .buttontext {
       background: #ea584e;
       color: #fff;
-      width: 80%;
+      width: 100%;
       margin: 0 auto;
       font-weight: 600;
     }

@@ -83,6 +83,14 @@ export const constantRouterMap = [
       keepAlive: false
     }
   },
+  {
+    path: '/404',
+    component: () => import('@/views/404/index.vue'),
+    meta: {
+      title: '天空之橙',
+      keepAlive: false
+    }
+  },
 
   {
     path: '*',
