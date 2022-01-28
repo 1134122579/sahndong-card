@@ -193,3 +193,19 @@ export function checkYearVip(data) {
     hideloading: true
   })
 }
+export function ReceiveCoupon(data) {
+  return request({
+    url: api.ReceiveCoupon,
+    method: 'get',
+    data,
+    hideloading: true
+  })
+}
+export function getCouponLog(params) {
+  return request({
+    url: api.getCouponLog,
+    method: 'get',
+    params,
+    hideloading: true
+  })
+}

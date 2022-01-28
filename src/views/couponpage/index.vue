@@ -2,15 +2,37 @@
   <div class="index-container" id="index-container">
     <!-- <img src="http://mfyfile.greatorange.cn/skyauth.png" class="headerImg" /> -->
     <div class="button_">
-      <van-button class="buttontext img_animes" round block @click="getcouponCode">立即领取</van-button>
+      <div class="coup_bg">
+        <van-button class="buttontext img_animes" round block @click="ReceiveCoupon">立即领取</van-button>
+      </div>
+      <p class="tagone">本券当日有效，每人每天限用一张</p>
+      <p>*如有疑问请咨询店内服务人员</p>
       <div class="couponList">
-        <div class="couponList_title">领取记录</div>
-        <ul>
-          <li v-for="item in 30">
-            <div>时间</div>
-            <div class="shiyong" @click="iscodebutton">已使用</div>
+        <div class="couponList_title">我的领取记录</div>
+        <div class="couponList_nav">
+          <p
+            v-for="item in statusType"
+            :class="status == item.status ? 'sur' : ''"
+            :key="item.status"
+            @click="navButton(item.status)"
+          >
+            {{ item.name }}
+          </p>
+        </div>
+        <ul v-if="list.length > 0">
+          <li v-for="item in list" :key="item.id">
+            <div class="content_list">
+              <h5>{{ item.code }}</h5>
+              <p>{{ item.create_time }}</p>
+            </div>
+            <div class="shiyong" @click="iscodebutton(item.code, item)">
+              {{ item.status == 2 ? '未使用' : '暂未判断' }}
+            </div>
           </li>
         </ul>
+        <div v-if="list.length <= 0" class="nullstyle">
+          <van-empty description="暂无数据" />
+        </div>
       </div>
     </div>
     <!-- 安全协议 -->
@@ -25,9 +47,9 @@
     >
       <div class="codepage">
         <p>领取成功</p>
-        <p>此优惠券当日有效</p>
+        <p>抵扣券仅限当日有效</p>
         <div id="qrcode" ref="qrcode"></div>
-        <p>验证后失效</p>
+        <p>核销后失效</p>
       </div>
     </van-popup>
   </div>
@@ -50,6 +72,16 @@ export default {
   },
   data() {
     return {
+      statusType: [
+        {
+          status: 2,
+          name: '未使用'
+        },
+        {
+          status: 1,
+          name: '已使用'
+        }
+      ],
       qrcodecreated: null,
       mylist: [],
       myplayshow: false,
@@ -63,7 +95,9 @@ export default {
       is_pay: false,
       show: false,
       userInfo: {},
-      payToolsOrderApi: {}
+      payToolsOrderApi: {},
+      list: [],
+      status: 2
     }
   },
   created() {
@@ -72,8 +106,30 @@ export default {
 
   mounted() {},
   methods: {
-    iscodebutton() {
-      let text = `${location.origin}/applypage?couponcode=12231415555454`
+    navButton(status) {
+      if (status == this.status) return
+      this.status = status
+      this.getCouponLog()
+    },
+    // 获取列表
+    getCouponLog() {
+      this.Api.getCouponLog({ status: this.status }).then(res => {
+        console.log(res)
+        this.list = res.data
+      })
+    },
+    // 领取
+    ReceiveCoupon() {
+      this.Api.ReceiveCoupon().then(res => {
+        this.iscodebutton(res.data)
+      })
+    },
+    iscodebutton(coupon_code, item) {
+      if (item && item.status == 1) {
+        this.$toast.fail('已使用')
+        return
+      }
+      let text = `${location.origin}/applypage?couponcode=${coupon_code}`
       this.qrcodecreated.clear() // 清除二维码
       this.qrcodecreated.makeCode(text) // 也可以调用方法生成二维码，好处
       this.show = true
@@ -90,6 +146,7 @@ export default {
           this.userInfo = res.data
           // this.payVipOrder()
           this.qrcode() //展示二维码
+          this.getCouponLog()
         })
       }
     },
@@ -117,55 +174,126 @@ export default {
   background: #94908d url('http://mfyfile.greatorange.cn/skyauth.png') no-repeat;
   background-size: 100% auto;
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   flex-direction: column;
+  overflow: hidden;
+  color: #595656;
   // 领取
   .button_ {
     width: 100%;
+    margin-top: 190px;
+    .coup_bg {
+      background: url('../../assets/coupon_bg.png') no-repeat;
+      background-size: 100% auto;
+      height: 6.53333rem;
+      box-sizing: border-box;
+      padding-top: 110px;
+      margin: 0 10px;
+      overflow: hidden;
+      .buttontext {
+        background: #ea584e;
+        color: #fff;
+        width: 60%;
+        margin: 0 auto;
+        font-weight: 600;
+      }
+    }
+    .tagone {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    p {
+      font-size: 12px;
+      text-align: center;
+      line-height: 1.5;
+      color: #fff;
+    }
     .couponList {
       display: flex;
       justify-content: flex-end;
       align-items: center;
       flex-direction: column;
-      margin: 20px 10px;
+      margin: 20px 10px 30px;
       box-sizing: border-box;
       background: #fff;
-      padding: 10px 10px;
-      border-radius: 20px;
+      padding: 0 10px 10px;
+      border-radius: 10px;
       text-align: center;
       line-height: 1.8;
       font-size: 16px;
       height: 350px;
       .couponList_title {
+        font-size: 18px;
+        padding: 4px 14px;
+        text-align: left;
         width: 100%;
-        font-size: 20px;
-        font-weight: 600;
         flex-shrink: 0;
+        box-sizing: border-box;
+      }
+      .couponList_nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #ec6925;
+        padding: 4px;
+        border-radius: 30px;
+        margin-bottom: 10px;
+        p {
+          border-radius: 30px;
+          line-height: 2;
+          width: 150px;
+        }
+        .sur {
+          background: #fff;
+          color: #ec6925;
+          color: #595656;
+        }
       }
       ul {
         flex: 1;
         width: 100%;
         overflow-y: auto;
-
         li {
-          margin-bottom: 10px;
-          font-size: 16px;
+          font-size: 14px;
           display: flex;
+          padding: 5px 0;
+          margin-bottom: 10px;
           justify-content: space-between;
+          border-bottom: 1px solid #eceaea;
+          .content_list {
+            color: #595656;
+            text-align: left;
+            h5 {
+              font-weight: bold;
+            }
+            p {
+              text-align: left;
+              font-size: 12px;
+              color: #595656;
+              line-height: 1;
+            }
+          }
           .shiyong {
             border-radius: 40px;
             border: 1px solid #ec6927;
             font-size: 14px;
             padding: 0 14px;
             color: #ec6927;
+            height: 25px;
+            line-height: 25px;
           }
           .weishiyong {
             color: #ccc;
             border: 1px solid #ccc;
           }
+        }
+      }
+      .nullstyle {
+        flex: 1;
+        p {
+          color: #ccc;
         }
       }
     }

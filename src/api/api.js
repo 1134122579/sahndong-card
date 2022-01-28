@@ -21,7 +21,9 @@ const api = {
   getUserOrder: '/getUserOrder',
   createSkybeerCode: '/createSkybeerCode',
   receiveSkyBeerVip: '/receiveSkyBeerVip',
-  checkYearVip: '/checkYearVip' //检查年卡是否是会员
+  checkYearVip: '/checkYearVip', //检查年卡是否是会员
+  ReceiveCoupon: '/ReceiveCoupon',
+  getCouponLog: '/getCouponLog'
 }
 
 export default api
