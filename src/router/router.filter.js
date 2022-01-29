@@ -19,6 +19,20 @@ export default function (router) {
         })
         return
       }
+      if (to.path == '/couponpage') {
+        let wxConfig = {
+          title: '@所有人 速抢！天空之橙抵用券',
+          desc: '免费领取天空之橙抵用券',
+          link: location.origin + location.pathname,
+          imgUrl: 'http://api.skyorange.cn/wxh5/skylogo.jpg',
+          success(res) {}
+        }
+        getShareInfo(wxConfig, res => {
+          console.log('分享完成===', res.data)
+          next()
+        })
+        return
+      }
       let wxConfig = {
         title: '@所有人 速抢！天空之橙全年免票卡！',
         desc: '19.9抢价值天空之橙全年免票卡',

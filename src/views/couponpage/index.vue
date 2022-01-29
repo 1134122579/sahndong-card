@@ -136,7 +136,7 @@ export default {
     // 领取
     ReceiveCoupon() {
       this.Api.ReceiveCoupon().then(res => {
-        this.iscodebutton(res.data)
+        this.iscodebutton(res.data.coupon_code)
       })
     },
     iscodebutton(coupon_code, item) {
@@ -144,14 +144,16 @@ export default {
         this.$toast.fail('已使用')
         return
       }
-      if (item.isshixiao) {
+      if (item && item.isshixiao) {
         this.$toast.fail('已失效')
         return
       }
-      let text = `${location.origin}/applypage?couponcode=${coupon_code}`
+      // let text = `${location.origin}${location.pathname}/applypage?couponcode=${coupon_code}`
+      let text = `http://api.skyorange.cn/wxh5/applypage?couponcode=${coupon_code}`
       this.qrcodecreated.clear() // 清除二维码
       this.qrcodecreated.makeCode(text) // 也可以调用方法生成二维码，好处
       this.show = true
+      this.getCouponLog()
     },
     overlay() {},
     getcouponCode() {
