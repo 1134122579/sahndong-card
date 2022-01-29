@@ -24,7 +24,8 @@ const api = {
   checkYearVip: '/checkYearVip', //检查年卡是否是会员
   ReceiveCoupon: '/ReceiveCoupon',
   getCouponLog: '/getCouponLog',
-  checkCoupon: '/checkCoupon'
+  checkCoupon: '/checkCoupon',
+  getCouponDetial: '/getCouponDetial'
 }
 
 export default api

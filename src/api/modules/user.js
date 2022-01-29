@@ -217,3 +217,11 @@ export function checkCoupon(params) {
     hideloading: true
   })
 }
+export function getCouponDetial(params) {
+  return request({
+    url: api.getCouponDetial,
+    method: 'get',
+    params,
+    hideloading: true
+  })
+}
